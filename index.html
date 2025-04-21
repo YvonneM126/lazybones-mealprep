@@ -4,22 +4,118 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400|Source+Sans+Pro:400,600,700" rel="stylesheet">
+  <link rel="stylesheet" href="styles/animate.css">
+  <link rel="stylesheet" href="styles/icomoon.css">
+  <link rel="stylesheet" href="styles/bootstrap.css">
+
     <!-- PUT A TITLE IN HERE -->
-    <title>This is the demo</title>
+    <title>Lazybones Meal Prep</title>
+
     <!-- PUT A DESCRIPTION IN HERE -->
-    <meta name="description" content="describe content of the page here...." />
+    <meta name="description" content="An interactive nutrition guide to help you create balanced meals." />
+
     <!-- LINK TO NORMALIZE (FOR CONSISTENCY) -->
-    <link rel="stylesheet" href="styles.normalize.css" />
-    <!-- LINK TO ANY FRAMEWORK STYLES HERE-->
+    <link rel="stylesheet" href="styles/normalize.css" />
+
+    <!-- LINK TO ANY FRAMEWORK STYLES HERE -->
+    <link rel="stylesheet" href="styles/framework.css" /> <!-- optional if you add Bootstrap or other -->
+
     <!-- LINK TO YOUR STYLES -->
     <link rel="stylesheet" href="styles/styles.css" />
+
     <!-- LINK TO EXTERNAL JS LIBRARIES HERE -->
+
     <!-- LINK TO YOUR JS HERE. NOTE THE DEFER ATTRIBUTE. -->
     <script src="scripts/scripts.js" defer></script>
   </head>
+
   <body>
-    <!-- YOUR HTML GOES HERE -->
-<h1>Lazy Bones</h1>
-    <!-- YOUR EXTERNAL PLUG-IN MAY ASK YOU TO PUT A SCRIPT TAG HERE. -->
-  </body>
+  <div id="page">
+    <!-- Navbar -->
+    <nav class="fh5co-nav" role="navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 text-right menu-1">
+            <ul>
+              <li><a href="index.html" class="active">HOME</a></li>
+              <li><a href="learn.html">LEARN</a></li>
+              <li><a href="start.html">START YOUR PREP</a></li>
+              <li><a href="about.html">ABOUT</a></li>
+              <li><a href="story.html">SHARE YOUR STORY</a></li>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <header id="fh5co-header" class="fh5co-cover" style="background-image:url(images/bg.jpg);" role="banner">
+      <div class="overlay"></div>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <h1 class="mb30">START YOUR OWN PERSONALIZED MEAL PREP</h1>
+            <a class="btn btn-primary btn-lg" href="learn.html">Learn More About It ↓</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Info Cards -->
+    <div id="fh5co-services" class="fh5co-bg-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 text-center">
+            <div class="services">
+              <div class="icon">
+                <img src="images/pic01.jpg" alt="Why and What" class="service-img">
+              </div>
+              <div class="desc">
+                <h3>WHY AND WHAT</h3>
+                <p>Learn why personalized nutrition matters and how this tool makes meal prep simple and effective for your goals.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 text-center">
+            <div class="services">
+              <div class="icon">
+                <img src="images/pic02.jpg" alt="About Us" class="service-img">
+              </div>
+              <div class="desc">
+                <h3>ABOUT US</h3>
+                <p>We aim to make nutrition approachable and effortless for busy, health-conscious individuals and fitness lovers.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="fh5co-footer" role="contentinfo">
+      <div class="container">
+        <div class="row row-pb-md">
+          <div class="col-md-6 fh5co-widget">
+            <h3>Explore</h3>
+            <ul class="fh5co-footer-links">
+              <li><a href="story.html">SHARE YOUR STORY</a></li>
+              <li><a href="learn.html">LEARN</a></li>
+            </ul>
+          </div>
+          <div class="col-md-6 fh5co-widget text-right">
+            <h3>Navigate</h3>
+            <ul class="fh5co-footer-links">
+              <li><a href="start.html">START YOUR PREP</a></li>
+              <li><a href="about.html">ABOUT</a></li>
+              <li><a href="index.html">HOME</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
 </html>
