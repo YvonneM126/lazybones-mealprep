@@ -29,102 +29,220 @@
 
     <!-- LINK TO YOUR JS HERE. NOTE THE DEFER ATTRIBUTE. -->
     <script src="scripts/scripts.js" defer></script>
-  </head>
 
-  <body>
-    <div id="page">
-      <!-- Navbar -->
-      <nav class="fh5co-nav" role="navigation">
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-12 text-right menu-1">
-              <ul>
-                <li><a href="index.html">HOME</a></li>
-                <li><a href="learn.html">LEARN</a></li>
-                <li><a href="start.html" class="active">START YOUR PREP</a></li>
-                <li><a href="about.html">ABOUT</a></li>
-                <li><a href="story.html">SHARE YOUR STORY</a></li>
-              </ul>
-            </div>
+  <style>
+    #results {
+      background-color: #fff;
+      border-radius: 5px;
+      padding: 20px;
+      margin-top: 30px;
+      display: none;
+    }
+    #results h3 {
+      color: #8BC34A;
+      margin-bottom: 20px;
+    }
+    .result-item {
+      margin-bottom: 15px;
+    }
+    .result-item strong {
+      font-weight: 600;
+      color: #444;
+    }
+    .macro-bar {
+      height: 25px;
+      margin-top: 10px;
+      border-radius: 3px;
+      overflow: hidden;
+      display: flex;
+    }
+    .protein-bar {
+      background-color: #FF5722;
+    }
+    .carbs-bar {
+      background-color: #2196F3;
+    }
+    .fat-bar {
+      background-color: #FFEB3B;
+    }
+    .macro-legend {
+      display: flex;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    .legend-item {
+      margin-right: 20px;
+      display: flex;
+      align-items: center;
+    }
+    .legend-color {
+      width: 15px;
+      height: 15px;
+      margin-right: 5px;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="page">
+    <!-- Navbar -->
+    <nav class="fh5co-nav" role="navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 text-right menu-1">
+            <ul>
+              <li><a href="index.html">HOME</a></li>
+              <li><a href="learn.html">LEARN</a></li>
+              <li><a href="start.html" class="active">START YOUR PREP</a></li>
+              <li><a href="about.html">ABOUT</a></li>
+              <li><a href="story.html">SHARE YOUR STORY</a></li>
+            </ul>
           </div>
         </div>
-      </nav>
-  
-      <!-- Prep Form Section -->
-      <div id="fh5co-contact" class="fh5co-bg-section">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-              <h2 style="color: #ffffff;">START YOUR OWN NOW</h2>
-              <p style="color: #9a9a9a;">Fill out the form below to generate your customized meal prep.</p>
-            </div>
-            <div class="col-md-8 col-md-offset-2 animate-box">
-              <form style="max-width: 500px; margin: 0 auto; padding: 20px;">
-                <div class="form-group" style="margin-bottom: 25px;">
-                  <input type="text" class="form-control" placeholder="Gender" required style="width: 100%; box-sizing: border-box; height: 55px; background-color: #fff; border: 1px solid #e6e6e6;">
+      </div>
+    </nav>
+
+    <!-- Prep Form Section -->
+    <div id="fh5co-contact" class="fh5co-bg-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+            <h2 style="color: #ffffff;">START YOUR OWN NOW</h2>
+            <p style="color: #9a9a9a;">Fill out the form below to generate your customized meal prep.</p>
+          </div>
+          <div class="col-md-8 col-md-offset-2 animate-box">
+            <form id="mealPrepForm" style="max-width: 500px; margin: 0 auto; padding: 20px;">
+              <div class="form-group" style="margin-bottom: 25px;">
+                <select id="gender" class="form-control" required style="width: 100%; box-sizing: border-box; height: 55px; background-color: #fff; border: 1px solid #e6e6e6;">
+                  <option value="">Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin-bottom: 25px;">
+                <input type="number" id="age" class="form-control" placeholder="Age" required style="width: 100%; box-sizing: border-box; height: 55px; background-color: #fff; border: 1px solid #e6e6e6;">
+              </div>
+              <div class="form-group" style="margin-bottom: 25px;">
+                <input type="number" id="weight" class="form-control" placeholder="Weight (kg)" required style="width: 100%; box-sizing: border-box; height: 55px; background-color: #fff; border: 1px solid #e6e6e6;">
+              </div>
+              <div class="form-group" style="margin-bottom: 25px;">
+                <input type="number" id="height" class="form-control" placeholder="Height (cm)" required style="width: 100%; box-sizing: border-box; height: 55px; background-color: #fff; border: 1px solid #e6e6e6;">
+              </div>
+              <div class="form-group" style="margin-bottom: 25px;">
+                <input type="number" id="meals" class="form-control" placeholder="Meals per day" required style="width: 100%; box-sizing: border-box; height: 55px; background-color: #fff; border: 1px solid #e6e6e6;">
+              </div>
+              <div class="form-group" style="margin-bottom: 25px;">
+                <select id="activity" class="form-control" required style="width: 100%; box-sizing: border-box; height: 55px; background-color: #fff; border: 1px solid #e6e6e6;">
+                  <option value="">Activity Level</option>
+                  <option value="1.2">Sedentary</option>
+                  <option value="1.375">Light Exercise</option>
+                  <option value="1.55">Moderate Activity</option>
+                  <option value="1.725">Very Active</option>
+                  <option value="1.9">Extremely Active</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin-bottom: 25px;">
+                <select id="goal" class="form-control" required style="width: 100%; box-sizing: border-box; height: 55px; background-color: #fff; border: 1px solid #e6e6e6;">
+                  <option value="">Goal</option>
+                  <option value="loss">Fat Loss</option>
+                  <option value="maintain">Balanced</option>
+                  <option value="gain">Muscle Gain</option>
+                </select>
+              </div>
+              <div class="form-group" style="text-align: center; margin-top: 35px;">
+                <input type="submit" value="Generate Meal Plan" class="btn btn-primary btn-md" style="background-color: #8BC34A; border-color: #8BC34A; padding: 15px 40px; border-radius: 3px; width: auto;">
+              </div>
+            </form>
+
+            <!-- Results section -->
+            <div id="results" class="animate-box">
+              <h3 class="text-center">Your Customized Meal Plan</h3>
+              
+              <div class="result-item">
+                <strong>BMR (Basal Metabolic Rate):</strong> <span id="bmrResult"></span> calories/day
+              </div>
+              
+              <div class="result-item">
+                <strong>TDEE (Total Daily Energy Expenditure):</strong> <span id="tdeeResult"></span> calories/day
+              </div>
+              
+              <div class="result-item">
+                <strong>Daily Calorie Target:</strong> <span id="calorieResult"></span> calories/day
+              </div>
+              
+              <div class="result-item">
+                <strong>Macronutrient Distribution:</strong>
+                <div class="macro-bar">
+                  <div class="protein-bar" id="proteinBar"></div>
+                  <div class="carbs-bar" id="carbsBar"></div>
+                  <div class="fat-bar" id="fatBar"></div>
                 </div>
-                <div class="form-group" style="margin-bottom: 25px;">
-                  <input type="number" class="form-control" placeholder="Age" required style="width: 100%; box-sizing: border-box; height: 55px; background-color: #fff; border: 1px solid #e6e6e6;">
+                <div class="macro-legend">
+                  <div class="legend-item">
+                    <div class="legend-color protein-bar"></div>
+                    <span>Protein</span>
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color carbs-bar"></div>
+                    <span>Carbs</span>
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color fat-bar"></div>
+                    <span>Fats</span>
+                  </div>
                 </div>
-                <div class="form-group" style="margin-bottom: 25px;">
-                  <input type="number" class="form-control" placeholder="Weight (kg)" required style="width: 100%; box-sizing: border-box; height: 55px; background-color: #fff; border: 1px solid #e6e6e6;">
-                </div>
-                <div class="form-group" style="margin-bottom: 25px;">
-                  <input type="number" class="form-control" placeholder="Height (cm)" required style="width: 100%; box-sizing: border-box; height: 55px; background-color: #fff; border: 1px solid #e6e6e6;">
-                </div>
-                <div class="form-group" style="margin-bottom: 25px;">
-                  <input type="number" class="form-control" placeholder="Meals per day" required style="width: 100%; box-sizing: border-box; height: 55px; background-color: #fff; border: 1px solid #e6e6e6;">
-                </div>
-                <div class="form-group" style="margin-bottom: 25px;">
-                  <select class="form-control" required style="width: 100%; box-sizing: border-box; height: 55px; background-color: #fff; border: 1px solid #e6e6e6;">
-                    <option value="">Activity Level</option>
-                    <option>Sedentary</option>
-                    <option>Light Exercise</option>
-                    <option>Moderate Activity</option>
-                    <option>Very Active</option>
-                    <option>Extremely Active</option>
-                  </select>
-                </div>
-                <div class="form-group" style="margin-bottom: 25px;">
-                  <select class="form-control" required style="width: 100%; box-sizing: border-box; height: 55px; background-color: #fff; border: 1px solid #e6e6e6;">
-                    <option value="">Goal</option>
-                    <option>Fat Loss</option>
-                    <option>Balanced</option>
-                    <option>Muscle Gain</option>
-                  </select>
-                </div>
-                <div class="form-group" style="text-align: center; margin-top: 35px;">
-                  <input type="submit" value="Generate Meal Plan" class="btn btn-primary btn-md" style="background-color: #8BC34A; border-color: #8BC34A; padding: 15px 40px; border-radius: 3px; width: auto;">
-                </div>
-              </form>
+              </div>
+              
+              <div class="result-item">
+                <strong>Daily Protein:</strong> <span id="proteinResult"></span> g (<span id="proteinPercent"></span>%)
+              </div>
+              
+              <div class="result-item">
+                <strong>Daily Carbohydrates:</strong> <span id="carbsResult"></span> g (<span id="carbsPercent"></span>%)
+              </div>
+              
+              <div class="result-item">
+                <strong>Daily Fats:</strong> <span id="fatResult"></span> g (<span id="fatPercent"></span>%)
+              </div>
+              
+              <div class="result-item">
+                <strong>Per Meal Breakdown (for <span id="mealsPerDay"></span> meals):</strong>
+                <div>Calories: <span id="caloriesPerMeal"></span> per meal</div>
+                <div>Protein: <span id="proteinPerMeal"></span>g per meal</div>
+                <div>Carbs: <span id="carbsPerMeal"></span>g per meal</div>
+                <div>Fats: <span id="fatPerMeal"></span>g per meal</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-  
-      <!-- Footer -->
-      <footer id="fh5co-footer" role="contentinfo">
-        <div class="container">
-          <div class="row row-pb-md">
-            <div class="col-md-6 fh5co-widget">
-              <h3>Explore</h3>
-              <ul class="fh5co-footer-links">
-                <li><a href="story.html">SHARE YOUR STORY</a></li>
-                <li><a href="learn.html">LEARN</a></li>
-              </ul>
-            </div>
-            <div class="col-md-6 fh5co-widget text-right">
-              <h3>Navigate</h3>
-              <ul class="fh5co-footer-links">
-                <li><a href="start.html">START YOUR PREP</a></li>
-                <li><a href="about.html">ABOUT</a></li>
-                <li><a href="index.html">HOME</a></li>
-              </ul>
-            </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="fh5co-footer" role="contentinfo">
+      <div class="container">
+        <div class="row row-pb-md">
+          <div class="col-md-6 fh5co-widget">
+            <h3>Explore</h3>
+            <ul class="fh5co-footer-links">
+              <li><a href="story.html">SHARE YOUR STORY</a></li>
+              <li><a href="learn.html">LEARN</a></li>
+            </ul>
+          </div>
+          <div class="col-md-6 fh5co-widget text-right">
+            <h3>Navigate</h3>
+            <ul class="fh5co-footer-links">
+              <li><a href="start.html">START YOUR PREP</a></li>
+              <li><a href="about.html">ABOUT</a></li>
+              <li><a href="index.html">HOME</a></li>
+            </ul>
           </div>
         </div>
-      </footer>
-    </div>
-  </body>
-  </html>
-  
+      </div>
+    </footer>
+  </div>
+
+<script src="scripts/scripts.js"></script>
+</body>
+</html>
