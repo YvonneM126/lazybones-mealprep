@@ -29,73 +29,311 @@
 
     <!-- LINK TO YOUR JS HERE. NOTE THE DEFER ATTRIBUTE. -->
     <script src="scripts/scripts.js" defer></script>
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <!-- AOS animation library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   </head>
 
-  <body>
-    <div id="page">
-      <!-- Navbar -->
-      <nav class="fh5co-nav" role="navigation">
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-12 text-right menu-1">
-              <ul>
-                <li><a href="index.html">HOME</a></li>
-                <li><a href="learn.html">LEARN</a></li>
-                <li><a href="start.html">START YOUR PREP</a></li>
-                <li><a href="about.html" class="active">ABOUT</a></li>
-                <li><a href="story.html">SHARE YOUR STORY</a></li>
-              </ul>
+  <style>
+    /* About Page Specific Styles */
+    .about-hero {
+      padding: 80px 0 40px;
+      position: relative;
+    }
+    
+    .mission-section {
+      padding: 60px 0;
+      background-color: #f8f9fa;
+    }
+    
+    .mission-box {
+      background-color: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      height: 100%;
+      transition: all 0.3s ease;
+    }
+    
+    .mission-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .mission-icon {
+      width: 70px;
+      height: 70px;
+      background-color: var(--lazy-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    
+    .mission-icon i {
+      font-size: 28px;
+      color: white;
+    }
+    
+    .mission-box h3 {
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+    
+    .mission-box p {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #666;
+    }
+    
+    .team-section {
+      padding: 60px 0;
+      background-color: white;
+    }
+    
+    .team-member {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .team-photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 15px;
+      border: 4px solid #f5f5f5;
+      transition: all 0.3s ease;
+    }
+    
+    .team-member:hover .team-photo {
+      transform: scale(1.05);
+      border-color: var(--lazy-color);
+    }
+    
+    .team-name {
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    
+    .team-title {
+      color: var(--lazy-color);
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    
+    .team-bio {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.5;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      margin-top: 15px;
+    }
+    
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #f5f5f5;
+      color: #666;
+      margin: 0 5px;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      background-color: var(--lazy-color);
+      color: white;
+    }
+    
+    .about-img {
+      border-radius: 8px;
+      overflow: hidden;
+      max-width: 90%;
+      margin: 0 auto;
+    }
+
+    .about-img img {
+      width: 100%;
+      height: auto;
+      transition: transform 0.3s ease;
+    }
+
+    .about-box {
+      background-color: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      margin-top: -60px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* 添加以下样式以减小页面各部分标题的字体大小 */
+    .fh5co-heading h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .fh5co-heading p {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  </style>
+</head>
+<body>
+  <div id="page">
+    <!-- Navbar -->
+    <nav class="fh5co-nav" role="navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-3 logo-container">
+            <!-- Logo with pulse animation -->
+            <div class="logo pulse">
+              <span class="logo-icon"><i class="fas fa-utensils"></i></span>
+              <span class="logo-text">Lazy Bones</span>
             </div>
+          </div>
+          <div class="col-xs-9 text-right menu-1">
+            <ul>
+              <li><a href="index.html">HOME</a></li>
+              <li><a href="learn.html">MEAL PLANS</a></li>
+              <li><a href="start.html">CALCULATOR</a></li>
+              <li><a href="about.html" class="active">ABOUT</a></li>
+            </ul>
           </div>
         </div>
-      </nav>
-  
-      <!-- About Section -->
-      <div id="fh5co-contact" class="fh5co-bg-section">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-              <h2 style="color: #ffffff;">ABOUT US</h2>
-              <p style="color: #9a9a9a;">Learn more about the Lazybones Meal Prep team</p>
-            </div>
+      </div>
+    </nav>
+
+    <!-- About Header -->
+    <div id="calculator-header" class="fh5co-bg-section about-hero">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+            <h2>ABOUT LAZY BONES</h2>
+            <p>Meet the team behind your favorite meal planning tool</p>
           </div>
-          <div class="row animate-box" style="max-width: 900px; margin: 0 auto; background-color: #fff; border-radius: 5px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-            <div class="col-md-6">
-              <img src="images/pic03.webp" alt="About" class="img-responsive" style="border-radius: 5px;">
-            </div>
-            <div class="col-md-6">
-              <h2 style="color: #333; font-size: 28px; margin-bottom: 20px;">About Lazybones Meal Prep</h2>
-              <p style="color: #666; line-height: 1.8; margin-bottom: 15px;">Lazybones Meal Prep is your personalized nutrition assistant. Whether you're training hard or just trying to eat better, our platform provides easy-to-follow, nutritious meal plans tailored to your body and lifestyle.</p>
-              <p style="color: #666; line-height: 1.8;">Built for convenience and clarity, it simplifies eating well into a few fun clicks. No matter your experience level, Lazybones makes meal planning easy and approachable.</p>
-              <a href="start.html" class="btn btn-primary" style="background-color: #8BC34A; border-color: #8BC34A; margin-top: 20px; padding: 12px 30px; border-radius: 3px;">Start Your Prep</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <div class="about-box" data-aos="fade-up">
+            <div class="row">
+              <div class="col-md-6" data-aos="fade-right">
+                <div class="about-img">
+                  <img src="images/haibao.jpg" alt="About Lazy Bones" class="img-responsive">
+                </div>
+              </div>
+              <div class="col-md-6" data-aos="fade-left" data-aos-delay="200">
+                <h3 style="font-size: 22px; margin-bottom: 15px;">Our Story</h3>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 12px;">Lazy Bones Meal Prep was born from a simple idea: nutrition shouldn't be complicated. Our founder, a fitness enthusiast who hated counting calories, wanted to create a tool that made healthy eating accessible to everyone, especially those who consider themselves "too lazy" to meal prep.</p>
+                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 12px;">Since our launch in 2020, we've helped thousands of people transform their eating habits without the hassle of complex nutrition plans. Our philosophy is simple - good nutrition should be easy, convenient, and enjoyable for everyone.</p>
+                <p style="font-size: 14px; line-height: 1.6;">Today, Lazy Bones continues to grow with a community of users who share our passion for simplified nutrition and balanced living.</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-  
-      <!-- Footer -->
-      <footer id="fh5co-footer" role="contentinfo">
-        <div class="container">
-          <div class="row row-pb-md">
-            <div class="col-md-6 fh5co-widget">
-              <h3>Explore</h3>
-              <ul class="fh5co-footer-links">
-                <li><a href="story.html">SHARE YOUR STORY</a></li>
-                <li><a href="learn.html">LEARN</a></li>
-              </ul>
+    </div>
+
+    <!-- Mission Section -->
+    <div class="mission-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+            <h2>OUR MISSION</h2>
+            <p>The values that drive everything we do</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4" data-aos="fade-up">
+            <div class="mission-box">
+              <div class="mission-icon">
+                <i class="fas fa-utensils"></i>
+              </div>
+              <h3 class="text-center">Simplicity</h3>
+              <p>We believe nutrition should be simple. Our tools strip away complexity and deliver exactly what you need without the fluff.</p>
             </div>
-            <div class="col-md-6 fh5co-widget text-right">
-              <h3>Navigate</h3>
-              <ul class="fh5co-footer-links">
-                <li><a href="start.html">START YOUR PREP</a></li>
-                <li><a href="about.html">ABOUT</a></li>
-                <li><a href="index.html">HOME</a></li>
-              </ul>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="mission-box">
+              <div class="mission-icon">
+                <i class="fas fa-seedling"></i>
+              </div>
+              <h3 class="text-center">Balance</h3>
+              <p>Good nutrition isn't about perfection—it's about balance. We help you find sustainable eating patterns that work with your lifestyle.</p>
+            </div>
+          </div>
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+            <div class="mission-box">
+              <div class="mission-icon">
+                <i class="fas fa-heart"></i>
+              </div>
+              <h3 class="text-center">Accessibility</h3>
+              <p>Healthy eating should be for everyone. We create tools that are easy to use regardless of your nutrition knowledge or cooking skills.</p>
             </div>
           </div>
         </div>
-      </footer>
+      </div>
     </div>
-  </body>
-  </html>
+
+ 
+
+    <!-- Footer -->
+    <footer id="fh5co-footer" role="contentinfo">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 fh5co-widget">
+            <div class="footer-logo">
+              <i class="fas fa-utensils"></i> Lazy Bones
+            </div>
+            <p class="footer-tagline">Nutrition made simple for lazy people.</p>
+          </div>
+          <div class="col-md-6 fh5co-widget text-right">
+            <h3>Quick Links</h3>
+            <ul class="fh5co-footer-links">
+              <li><a href="start.html">CALCULATOR</a></li>
+              <li><a href="learn.html">MEAL PLANS</a></li>
+              <li><a href="about.html">ABOUT</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row copyright">
+          <div class="col-md-12 text-center">
+            <p>&copy; 2023 Lazy Bones Meal Prep. All Rights Reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- AOS animation library script -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Initialize AOS animation
+    document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true
+      });
+    });
+  </script>
+</body>
+</html>
   
