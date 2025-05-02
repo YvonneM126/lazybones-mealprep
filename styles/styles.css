@@ -1347,3 +1347,224 @@ margin-bottom: 15px;
 color: #555;
 line-height: 1.4;
 }
+
+/* Mobile Navigation Styles */
+.hamburger-menu {
+display: none;
+cursor: pointer;
+position: absolute;
+right: 15px;
+top: 20px;
+z-index: 1010;
+}
+
+.hamburger-icon {
+width: 30px;
+height: 20px;
+position: relative;
+}
+
+.hamburger-icon span {
+display: block;
+position: absolute;
+height: 3px;
+width: 100%;
+background: #fff;
+border-radius: 3px;
+opacity: 1;
+left: 0;
+transform: rotate(0deg);
+transition: .25s ease-in-out;
+}
+
+.hamburger-icon span:nth-child(1) {
+top: 0px;
+}
+
+.hamburger-icon span:nth-child(2) {
+top: 8px;
+}
+
+.hamburger-icon span:nth-child(3) {
+top: 16px;
+}
+
+.hamburger-icon.open span:nth-child(1) {
+top: 8px;
+transform: rotate(135deg);
+}
+
+.hamburger-icon.open span:nth-child(2) {
+opacity: 0;
+right: -60px;
+}
+
+.hamburger-icon.open span:nth-child(3) {
+top: 8px;
+transform: rotate(-135deg);
+}
+
+.mobile-menu-overlay {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.95);
+z-index: 1000;
+overflow: auto;
+transition: all 0.3s ease;
+}
+
+.mobile-menu-content {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding-top: 80px;
+height: 100%;
+}
+
+.mobile-menu-content ul {
+padding: 0;
+margin: 0;
+list-style-type: none;
+text-align: center;
+}
+
+.mobile-menu-content ul li {
+margin-bottom: 25px;
+}
+
+.mobile-menu-content ul li a {
+color: white;
+font-size: 24px;
+letter-spacing: 1px;
+padding: 10px;
+display: block;
+transition: 0.3s;
+opacity: 0.8;
+}
+
+.mobile-menu-content ul li a:hover,
+.mobile-menu-content ul li a.active {
+opacity: 1;
+color: var(--lazy-color);
+}
+/* 更新媒体查询部分 */
+@media screen and (max-width: 768px) {
+.col-md-4, .col-md-6, .col-md-8, .col-md-12, .col-md-offset-2 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+#fh5co-header h1 {
+    font-size: 32px;
+}
+
+.menu-1 {
+  display: none !important; /* 隐藏原始菜单 */
+}
+
+.hamburger-menu {
+  display: block; /* 显示汉堡菜单 */
+}
+
+.fh5co-nav {
+    position: relative;
+    background: #343a40;
+    padding: 15px 0;
+}
+
+.fh5co-widget.text-right {
+  text-align: left;
+}
+
+.hero-buttons {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.logo-container {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.col-xs-3, .col-xs-9 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    text-align: center;
+}
+
+.feature-box, .step-box {
+    margin-bottom: 30px;
+}
+
+#benefits-section, #process-section {
+    padding: 60px 0;
+}
+
+.meal-plan-row {
+    flex-direction: column;
+    margin-bottom: 60px;
+}
+
+.reverse-row {
+    flex-direction: column;
+}
+
+.meal-plan-image {
+    margin-bottom: 30px;
+}
+
+.meal-plan-details {
+    padding: 0;
+}
+
+.macro-breakdown {
+    flex-direction: column;
+}
+
+.macro-item {
+    margin-bottom: 15px;
+}
+
+.meal-card {
+    margin-bottom: 30px;
+}
+
+#calculator-header {
+    padding: 100px 0 40px;
+}
+
+.calculator-form {
+    margin-top: -40px;
+    padding: 30px 20px;
+}
+
+#results .result-item {
+    text-align: center;
+}
+
+.calculator-character {
+    display: none;
+}
+
+/* 食物插图区域响应式调整 */
+.food-container {
+  flex-direction: column;
+}
+
+.food-item, .food-stats {
+  flex: 0 0 100%;
+  margin-bottom: 30px;
+}
+
+.plate {
+  width: 200px;
+  height: 200px;
+}
+}

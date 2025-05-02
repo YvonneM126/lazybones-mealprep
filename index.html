@@ -3,595 +3,573 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-  <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400|Source+Sans+Pro:400,600,700" rel="stylesheet">
-  <link rel="stylesheet" href="styles/animate.css">
-  <link rel="stylesheet" href="styles/icomoon.css">
-  <link rel="stylesheet" href="styles/bootstrap.css">
-
-    <!-- PUT A TITLE IN HERE -->
-    <title>Lazybones Meal Prep</title>
-
-    <!-- PUT A DESCRIPTION IN HERE -->
-    <meta name="description" content="An interactive nutrition guide to help you create balanced meals." />
-
-    <!-- LINK TO NORMALIZE (FOR CONSISTENCY) -->
+    <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400|Source+Sans+Pro:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="styles/animate.css">
+    <link rel="stylesheet" href="styles/icomoon.css">
+    <link rel="stylesheet" href="styles/bootstrap.css">
     <link rel="stylesheet" href="styles/normalize.css" />
-
-    <!-- LINK TO ANY FRAMEWORK STYLES HERE -->
-    <link rel="stylesheet" href="styles/framework.css" /> <!-- optional if you add Bootstrap or other -->
-
-    <!-- LINK TO YOUR STYLES -->
     <link rel="stylesheet" href="styles/styles.css" />
-
-    <!-- LINK TO EXTERNAL JS LIBRARIES HERE -->
-
-    <!-- LINK TO YOUR JS HERE. NOTE THE DEFER ATTRIBUTE. -->
-    <script src="scripts/scripts.js" defer></script>
-
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <!-- AOS animation library -->
+    <!-- 添加 AOS 动画库 -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <title>Lazybones Meal Prep - Easy Nutrition for Busy People</title>
+    <meta name="description" content="The easiest way to plan balanced meals without the hassle. Perfect nutrition for lazy people." />
+
+    <style>
+      /* 确保图片不超出容器 */
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      
+      /* 确保页面内容不超出视口 */
+      body, html {
+        width: 100%;
+        overflow-x: hidden;
+      }
+    </style>
+
+    <script src="scripts/scripts.js" defer></script>
   </head>
 
   <body>
-    <div id="page">
-      <!-- 添加食物图标动画背景 -->
-      <div class="food-icons-container">
-        <i class="food-icon fas fa-apple-alt"></i>
-        <i class="food-icon fas fa-carrot"></i>
-        <i class="food-icon fas fa-egg"></i>
-        <i class="food-icon fas fa-fish"></i>
-        <i class="food-icon fas fa-drumstick-bite"></i>
-        <i class="food-icon fas fa-bread-slice"></i>
-        <i class="food-icon fas fa-cheese"></i>
-        <i class="food-icon fas fa-pepper-hot"></i>
-        <i class="food-icon fas fa-hamburger"></i>
-        <i class="food-icon fas fa-pizza-slice"></i>
-      </div>
-      
-      <!-- Navbar -->
-      <nav class="fh5co-nav" role="navigation">
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-3 logo-container">
-              <!-- Logo 添加脉动动画 -->
-              <div class="logo pulse">
-                <span class="logo-icon"><i class="fas fa-utensils"></i></span>
-                <span class="logo-text">Lazy Bones</span>
-              </div>
-            </div>
-            <div class="col-xs-9 text-right menu-1">
-              <ul>
-                <li><a href="index.html" class="active">HOME</a></li>
-                <li><a href="learn.html">MEAL PLANS</a></li>
-                <li><a href="start.html">CALCULATOR</a></li>
-                <li><a href="about.html">ABOUT</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </nav>
-  
-      <!-- Hero -->
-      <header id="fh5co-header" class="fh5co-cover" role="banner">
-        <div class="overlay"></div>
-        <div class="container text-center">
-          <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-              <div class="hero-badge bounce">
-                <i class="fas fa-carrot hero-icon"></i>
-              </div>
-              <h1 class="mb30 fade-in">MEAL PREP FOR<br>LAZY PEOPLE</h1>
-              <p class="hero-text fade-in-delay">No more complex meal planning. Simple, delicious, and nutritious meals with minimal effort.</p>
-              <div class="hero-buttons fade-in-delay-2">
-                <a class="btn btn-primary btn-lg" href="start.html">Get My Plan <i class="fas fa-angle-right"></i></a>
-                <a class="btn btn-outline btn-lg" href="learn.html">See Examples</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-  
-      <!-- Benefits Section -->
-      <div id="benefits-section">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 text-center">
-              <h2 class="section-title" data-aos="fade-up">WHY LAZYBONES?</h2>
-              <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Nutrition doesn't have to be complicated</p>
-            </div>
-          </div>
-          
-          <div class="row feature-row">
-            <div class="col-md-4 text-center" data-aos="fade-up" data-aos-delay="200">
-              <div class="feature-box">
-                <div class="feature-icon">
-                  <i class="fas fa-bolt rotate-icon"></i>
-                </div>
-                <h3>QUICK & EASY</h3>
-                <p>Get your personalized meal plan in less than 60 seconds. No account required.</p>
-              </div>
-            </div>
-            
-            <div class="col-md-4 text-center" data-aos="fade-up" data-aos-delay="300">
-              <div class="feature-box">
-                <div class="feature-icon">
-                  <i class="fas fa-calculator pulse-icon"></i>
-                </div>
-                <h3>SCIENTIFICALLY BACKED</h3>
-                <p>Using proven formulas to calculate your exact nutritional needs based on your goals.</p>
-              </div>
-            </div>
-            
-            <div class="col-md-4 text-center" data-aos="fade-up" data-aos-delay="400">
-              <div class="feature-box">
-                <div class="feature-icon">
-                  <i class="fas fa-utensils wobble-icon"></i>
-                </div>
-                <h3>FLEXIBLE APPROACH</h3>
-                <p>Plans that work with your lifestyle, whether you're bulking, cutting, or maintaining.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- How It Works -->
-      <div id="process-section" class="fh5co-bg-section">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 text-center">
-              <h2 class="section-title" data-aos="fade-up">HOW IT WORKS</h2>
-              <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Three simple steps to better nutrition</p>
-            </div>
-          </div>
-          
-          <div class="row steps-row">
-            <div class="col-md-4 text-center" data-aos="zoom-in" data-aos-delay="200">
-              <div class="step-box">
-                <div class="step-number">1</div>
-                <h3>Enter Your Stats</h3>
-                <p>Tell us about your age, weight, height, and activity level.</p>
-              </div>
-            </div>
-            
-            <div class="col-md-4 text-center" data-aos="zoom-in" data-aos-delay="300">
-              <div class="step-box">
-                <div class="step-number">2</div>
-                <h3>Choose Your Goal</h3>
-                <p>Select whether you want to lose fat, maintain, or build muscle.</p>
-              </div>
-            </div>
-            
-            <div class="col-md-4 text-center" data-aos="zoom-in" data-aos-delay="400">
-              <div class="step-box">
-                <div class="step-number">3</div>
-                <h3>Get Your Plan</h3>
-                <p>Receive your personalized nutrition plan with exact macros and meal suggestions.</p>
-              </div>
-            </div>
-          </div>
-          
-          <div class="row">
-            <div class="col-md-12 text-center cta-container" data-aos="fade-up" data-aos-delay="500">
-              <a class="btn btn-primary btn-lg pulse-button" href="start.html">START NOW</a>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- 添加食物插图区域 -->
-      <div id="food-illustration-section">
-        <div class="container">
-          <div class="food-container" data-aos="fade-up">
-            <div class="food-item" data-aos="fade-right" data-aos-delay="200">
-              <div class="plate">
-                <div class="food protein" id="protein-visual"></div>
-                <div class="food veggies" id="carbs-visual"></div>
-                <div class="food carbs" id="fats-visual"></div>
-              </div>
-              <p>Perfectly balanced meals</p>
-            </div>
-            <div class="food-stats" data-aos="fade-left" data-aos-delay="300">
-              <div class="stat-item">
-                <label for="protein-slider">Protein: <span id="protein-value">30</span>%</label>
-                <input type="range" id="protein-slider" class="macro-slider" min="10" max="60" value="30">
-                <div class="stat-bar">
-                  <div class="stat-fill protein-fill" id="protein-bar" style="width: 30%"></div>
-                </div>
-              </div>
-              <div class="stat-item">
-                <label for="carbs-slider">Carbs: <span id="carbs-value">45</span>%</label>
-                <input type="range" id="carbs-slider" class="macro-slider" min="10" max="70" value="45">
-                <div class="stat-bar">
-                  <div class="stat-fill carbs-fill" id="carbs-bar" style="width: 45%"></div>
-                </div>
-              </div>
-              <div class="stat-item">
-                <label for="fats-slider">Fats: <span id="fats-value">25</span>%</label>
-                <input type="range" id="fats-slider" class="macro-slider" min="10" max="50" value="25">
-                <div class="stat-bar">
-                  <div class="stat-fill fats-fill" id="fats-bar" style="width: 25%"></div>
-                </div>
-              </div>
-              
-              <!-- Health Assessment -->
-              <div class="health-assessment" id="health-assessment">
-                <h4>Nutrition Assessment</h4>
-                <div class="assessment-result">
-                  <div class="assessment-icon">
-                    <i class="fas fa-check-circle"></i>
-                  </div>
-                  <div class="assessment-text">
-                    <p id="assessment-message">Your meal balance is healthy! Good protein, carbs and fat ratio.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Footer -->
-      <footer id="fh5co-footer" role="contentinfo">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6 fh5co-widget">
-              <div class="footer-logo">
-                <i class="fas fa-utensils"></i> Lazybones
-              </div>
-              <p class="footer-tagline">Simple nutrition for lazy people.</p>
-            </div>
-            <div class="col-md-6 fh5co-widget text-right">
-              <h3>Quick Links</h3>
-              <ul class="fh5co-footer-links">
-                <li><a href="start.html">CALCULATOR</a></li>
-                <li><a href="learn.html">MEAL PLANS</a></li>
-                <li><a href="about.html">ABOUT</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="row copyright">
-            <div class="col-md-12 text-center">
-              <p>&copy; 2023 Lazybones Meal Prep. All Rights Reserved.</p>
-            </div>
-          </div>
-        </div>
-      </footer>
+  <div id="page">
+    <!-- 添加食物图标动画背景 -->
+    <div class="food-icons-container">
+      <i class="food-icon fas fa-apple-alt"></i>
+      <i class="food-icon fas fa-carrot"></i>
+      <i class="food-icon fas fa-egg"></i>
+      <i class="food-icon fas fa-fish"></i>
+      <i class="food-icon fas fa-drumstick-bite"></i>
+      <i class="food-icon fas fa-bread-slice"></i>
+      <i class="food-icon fas fa-cheese"></i>
+      <i class="food-icon fas fa-pepper-hot"></i>
+      <i class="food-icon fas fa-hamburger"></i>
+      <i class="food-icon fas fa-pizza-slice"></i>
     </div>
-  
-    <!-- 添加AOS动画库脚本 -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      // 初始化AOS动画
-      document.addEventListener('DOMContentLoaded', function() {
-        AOS.init({
-          duration: 800,
-          easing: 'ease-in-out',
-          once: true
-        });
-  
-        // 卡路里计数器动画
-        let calories = 0;
-        let protein = 0;
-        let carbs = 0;
-        let fats = 0;
+    
+    <!-- Navbar -->
+    <nav class="fh5co-nav" role="navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-3 logo-container">
+            <!-- Logo 添加脉动动画 -->
+            <div class="logo pulse">
+              <span class="logo-icon"><i class="fas fa-utensils"></i></span>
+              <span class="logo-text">Lazy Bones</span>
+            </div>
+          </div>
+          <div class="col-xs-9 text-right menu-1">
+            <ul>
+              <li><a href="index.html" class="active">HOME</a></li>
+              <li><a href="learn.html">MEAL PLANS</a></li>
+              <li><a href="start.html">CALCULATOR</a></li>
+              <li><a href="about.html">ABOUT</a></li>
+            </ul>
+          </div>
+          <!-- 汉堡菜单按钮 -->
+          <div class="hamburger-menu">
+            <div class="hamburger-icon">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 移动端菜单覆盖层 -->
+    <div class="mobile-menu-overlay">
+      <div class="mobile-menu-content">
+        <ul>
+          <li><a href="index.html" class="active">HOME</a></li>
+          <li><a href="learn.html">MEAL PLANS</a></li>
+          <li><a href="start.html">CALCULATOR</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <header id="fh5co-header" class="fh5co-cover" role="banner">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <div class="hero-badge bounce">
+              <i class="fas fa-carrot hero-icon"></i>
+            </div>
+            <h1 class="mb30 fade-in">MEAL PREP FOR<br>LAZY PEOPLE</h1>
+            <p class="hero-text fade-in-delay">No more complex meal planning. Simple, delicious, and nutritious meals with minimal effort.</p>
+            <div class="hero-buttons fade-in-delay-2">
+              <a class="btn btn-primary btn-lg" href="start.html">Get My Plan <i class="fas fa-angle-right"></i></a>
+              <a class="btn btn-outline btn-lg" href="learn.html">See Examples</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Benefits Section -->
+    <div id="benefits-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h2 class="section-title" data-aos="fade-up">WHY LAZYBONES?</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Nutrition doesn't have to be complicated</p>
+          </div>
+        </div>
         
-        const targetCalories = 1200;
-        const targetProtein = 120;
-        const targetCarbs = 150;
-        const targetFats = 40;
-        
-        const duration = 2000; // 2秒动画
-        const steps = 50;
-        const interval = duration / steps;
-        
-        const calorieIncrement = targetCalories / steps;
-        const proteinIncrement = targetProtein / steps;
-        const carbsIncrement = targetCarbs / steps;
-        const fatsIncrement = targetFats / steps;
-        
-        const calorieEl = document.getElementById('calories');
-        const proteinEl = document.getElementById('protein');
-        const carbsEl = document.getElementById('carbs');
-        const fatsEl = document.getElementById('fats');
-        
-        const counterInterval = setInterval(() => {
-          calories += calorieIncrement;
-          protein += proteinIncrement;
-          carbs += carbsIncrement;
-          fats += fatsIncrement;
+        <div class="row feature-row">
+          <div class="col-md-4 text-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="feature-box">
+              <div class="feature-icon">
+                <i class="fas fa-bolt rotate-icon"></i>
+              </div>
+              <h3>QUICK & EASY</h3>
+              <p>Get your personalized meal plan in less than 60 seconds. No account required.</p>
+            </div>
+          </div>
           
-          calorieEl.textContent = Math.round(calories);
-          proteinEl.textContent = Math.round(protein);
-          carbsEl.textContent = Math.round(carbs);
-          fatsEl.textContent = Math.round(fats);
+          <div class="col-md-4 text-center" data-aos="fade-up" data-aos-delay="300">
+            <div class="feature-box">
+              <div class="feature-icon">
+                <i class="fas fa-calculator pulse-icon"></i>
+              </div>
+              <h3>SCIENTIFICALLY BACKED</h3>
+              <p>Using proven formulas to calculate your exact nutritional needs based on your goals.</p>
+            </div>
+          </div>
           
-          if (calories >= targetCalories) {
-            clearInterval(counterInterval);
-          }
-        }, interval);
-  
-        // 随机移动食物图标
-        const foodIcons = document.querySelectorAll('.food-icon');
+          <div class="col-md-4 text-center" data-aos="fade-up" data-aos-delay="400">
+            <div class="feature-box">
+              <div class="feature-icon">
+                <i class="fas fa-utensils wobble-icon"></i>
+              </div>
+              <h3>FLEXIBLE APPROACH</h3>
+              <p>Plans that work with your lifestyle, whether you're bulking, cutting, or maintaining.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- How It Works -->
+    <div id="process-section" class="fh5co-bg-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h2 class="section-title" data-aos="fade-up">HOW IT WORKS</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Three simple steps to better nutrition</p>
+          </div>
+        </div>
         
-        foodIcons.forEach(icon => {
-          setRandomPosition(icon);
-          setInterval(() => {
-            animateIcon(icon);
-          }, Math.random() * 5000 + 3000);
-        });
+        <div class="row steps-row">
+          <div class="col-md-4 text-center" data-aos="zoom-in" data-aos-delay="200">
+            <div class="step-box">
+              <div class="step-number">1</div>
+              <h3>Enter Your Stats</h3>
+              <p>Tell us about your age, weight, height, and activity level.</p>
+            </div>
+          </div>
+          
+          <div class="col-md-4 text-center" data-aos="zoom-in" data-aos-delay="300">
+            <div class="step-box">
+              <div class="step-number">2</div>
+              <h3>Choose Your Goal</h3>
+              <p>Select whether you want to lose fat, maintain, or build muscle.</p>
+            </div>
+          </div>
+          
+          <div class="col-md-4 text-center" data-aos="zoom-in" data-aos-delay="400">
+            <div class="step-box">
+              <div class="step-number">3</div>
+              <h3>Get Your Plan</h3>
+              <p>Receive your personalized nutrition plan with exact macros and meal suggestions.</p>
+            </div>
+          </div>
+        </div>
         
-        function setRandomPosition(element) {
-          const x = Math.random() * 100;
-          const y = Math.random() * 100;
-          
-          element.style.left = `${x}%`;
-          element.style.top = `${y}%`;
-          element.style.animationDuration = `${Math.random() * 8 + 4}s`;
-          element.style.animationDelay = `${Math.random() * 5}s`;
-        }
-        
-        function animateIcon(element) {
-          const currentX = parseFloat(element.style.left);
-          const currentY = parseFloat(element.style.top);
-          
-          let newX = Math.random() * 100;
-          let newY = Math.random() * 100;
-          
-          // 确保移动距离足够远
-          while (Math.abs(newX - currentX) < 30 || Math.abs(newY - currentY) < 30) {
-            newX = Math.random() * 100;
-            newY = Math.random() * 100;
-          }
-          
-          element.style.transition = 'left 3s ease-in-out, top 3s ease-in-out';
-          element.style.left = `${newX}%`;
-          element.style.top = `${newY}%`;
-        }
+        <div class="row">
+          <div class="col-md-12 text-center cta-container" data-aos="fade-up" data-aos-delay="500">
+            <a class="btn btn-primary btn-lg pulse-button" href="start.html">START NOW</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 添加食物插图区域 -->
+    <div id="food-illustration-section">
+      <div class="container">
+        <div class="food-container" data-aos="fade-up">
+          <div class="food-item" data-aos="fade-right" data-aos-delay="200">
+            <div class="plate">
+              <div class="food protein" id="protein-visual"></div>
+              <div class="food veggies" id="carbs-visual"></div>
+              <div class="food carbs" id="fats-visual"></div>
+            </div>
+            <p>Perfectly balanced meals</p>
+          </div>
+          <div class="food-stats" data-aos="fade-left" data-aos-delay="300">
+            <div class="stat-item">
+              <label for="protein-slider">Protein: <span id="protein-value">30</span>%</label>
+              <input type="range" id="protein-slider" class="macro-slider" min="10" max="60" value="30">
+              <div class="stat-bar">
+                <div class="stat-fill protein-fill" id="protein-bar" style="width: 30%"></div>
+              </div>
+            </div>
+            <div class="stat-item">
+              <label for="carbs-slider">Carbs: <span id="carbs-value">45</span>%</label>
+              <input type="range" id="carbs-slider" class="macro-slider" min="10" max="70" value="45">
+              <div class="stat-bar">
+                <div class="stat-fill carbs-fill" id="carbs-bar" style="width: 45%"></div>
+              </div>
+            </div>
+            <div class="stat-item">
+              <label for="fats-slider">Fats: <span id="fats-value">25</span>%</label>
+              <input type="range" id="fats-slider" class="macro-slider" min="10" max="50" value="25">
+              <div class="stat-bar">
+                <div class="stat-fill fats-fill" id="fats-bar" style="width: 25%"></div>
+              </div>
+            </div>
+            
+            <!-- Health Assessment -->
+            <div class="health-assessment" id="health-assessment">
+              <h4>Nutrition Assessment</h4>
+              <div class="assessment-result">
+                <div class="assessment-icon">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="assessment-text">
+                  <p id="assessment-message">Your meal balance is healthy! Good protein, carbs and fat ratio.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="fh5co-footer" role="contentinfo">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 fh5co-widget">
+            <div class="footer-logo">
+              <i class="fas fa-utensils"></i> Lazybones
+            </div>
+            <p class="footer-tagline">Simple nutrition for lazy people.</p>
+          </div>
+          <div class="col-md-6 fh5co-widget text-right">
+            <h3>Quick Links</h3>
+            <ul class="fh5co-footer-links">
+              <li><a href="start.html">CALCULATOR</a></li>
+              <li><a href="learn.html">MEAL PLANS</a></li>
+              <li><a href="about.html">ABOUT</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row copyright">
+          <div class="col-md-12 text-center">
+            <p>&copy; 2023 Lazybones Meal Prep. All Rights Reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- 添加AOS动画库脚本 -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // 初始化AOS动画
+    document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true
       });
-    </script>
-  
-    <style>
-      /* 添加交互式滑块样式 */
-      .macro-slider {
-        width: 100%;
-        height: 10px;
-        border-radius: 5px;
-        background: #e0e0e0;
-        outline: none;
-        -webkit-appearance: none;
-        margin: 10px 0;
-        cursor: pointer;
-      }
+
+      // 随机移动食物图标
+      const foodIcons = document.querySelectorAll('.food-icon');
       
-      .macro-slider::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: var(--lazy-color);
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
+      foodIcons.forEach(icon => {
+        setRandomPosition(icon);
+        setInterval(() => {
+          animateIcon(icon);
+        }, Math.random() * 5000 + 3000);
+      });
       
-      .macro-slider::-webkit-slider-thumb:hover {
-        background: #E65100;
-        transform: scale(1.1);
-      }
-      
-      .health-assessment {
-        margin-top: 30px;
-        padding: 15px;
-        border-radius: 8px;
-        background-color: #f5f5f5;
-        transition: all 0.3s ease;
-      }
-      
-      .health-assessment h4 {
-        margin-top: 0;
-        margin-bottom: 10px;
-        font-size: 16px;
-        color: #333;
-      }
-      
-      .assessment-result {
-        display: flex;
-        align-items: center;
-      }
-      
-      .assessment-icon {
-        margin-right: 15px;
-        font-size: 24px;
-        color: #4CAF50;
-      }
-      
-      .assessment-text p {
-        margin: 0;
-        font-size: 14px;
-        color: #666;
-      }
-      
-      /* 动画效果 */
-      @keyframes pulse-assessment {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
-      }
-      
-      .pulse-assessment {
-        animation: pulse-assessment 1s ease-in-out;
-      }
-    </style>
-  
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // DOM元素
-        const proteinSlider = document.getElementById('protein-slider');
-        const carbsSlider = document.getElementById('carbs-slider');
-        const fatsSlider = document.getElementById('fats-slider');
+      function setRandomPosition(element) {
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
         
-        const proteinValue = document.getElementById('protein-value');
-        const carbsValue = document.getElementById('carbs-value');
-        const fatsValue = document.getElementById('fats-value');
+        element.style.left = `${x}%`;
+        element.style.top = `${y}%`;
+        element.style.animationDuration = `${Math.random() * 8 + 4}s`;
+        element.style.animationDelay = `${Math.random() * 5}s`;
+      }
+      
+      function animateIcon(element) {
+        const currentX = parseFloat(element.style.left);
+        const currentY = parseFloat(element.style.top);
         
-        const proteinBar = document.getElementById('protein-bar');
-        const carbsBar = document.getElementById('carbs-bar');
-        const fatsBar = document.getElementById('fats-bar');
+        let newX = Math.random() * 100;
+        let newY = Math.random() * 100;
         
-        const proteinVisual = document.getElementById('protein-visual');
-        const carbsVisual = document.getElementById('carbs-visual');
-        const fatsVisual = document.getElementById('fats-visual');
-        
-        const assessmentMessage = document.getElementById('assessment-message');
-        const assessmentIcon = document.querySelector('.assessment-icon i');
-        const healthAssessment = document.getElementById('health-assessment');
-        
-        // 更新视觉效果和健康评估
-        function updateNutrition() {
-          const proteinPercent = parseInt(proteinSlider.value);
-          const carbsPercent = parseInt(carbsSlider.value);
-          const fatsPercent = parseInt(fatsSlider.value);
-          
-          // 计算总和
-          const total = proteinPercent + carbsPercent + fatsPercent;
-          
-          // 如果总和不等于100，调整值
-          if (total !== 100) {
-            const adjustedProtein = Math.round((proteinPercent / total) * 100);
-            const adjustedCarbs = Math.round((carbsPercent / total) * 100);
-            const adjustedFats = 100 - adjustedProtein - adjustedCarbs;
-            
-            // 更新显示值
-            proteinValue.textContent = adjustedProtein;
-            carbsValue.textContent = adjustedCarbs;
-            fatsValue.textContent = adjustedFats;
-            
-            // 更新条形图
-            proteinBar.style.width = adjustedProtein + '%';
-            carbsBar.style.width = adjustedCarbs + '%';
-            fatsBar.style.width = adjustedFats + '%';
-            
-            // 更新视觉食物
-            updateFoodVisual(adjustedProtein, adjustedCarbs, adjustedFats);
-            
-            // 更新健康评估
-            updateHealthAssessment(adjustedProtein, adjustedCarbs, adjustedFats);
-          } else {
-            // 更新显示值
-            proteinValue.textContent = proteinPercent;
-            carbsValue.textContent = carbsPercent;
-            fatsValue.textContent = fatsPercent;
-            
-            // 更新条形图
-            proteinBar.style.width = proteinPercent + '%';
-            carbsBar.style.width = carbsPercent + '%';
-            fatsBar.style.width = fatsPercent + '%';
-            
-            // 更新视觉食物
-            updateFoodVisual(proteinPercent, carbsPercent, fatsPercent);
-            
-            // 更新健康评估
-            updateHealthAssessment(proteinPercent, carbsPercent, fatsPercent);
-          }
+        // 确保移动距离足够远
+        while (Math.abs(newX - currentX) < 30 || Math.abs(newY - currentY) < 30) {
+          newX = Math.random() * 100;
+          newY = Math.random() * 100;
         }
         
-        // 更新食物视觉效果
-        function updateFoodVisual(protein, carbs, fats) {
-          // 将百分比转换为视觉尺寸
-          const maxSize = 100; // 最大尺寸（基于CSS中的像素）
+        element.style.transition = 'left 3s ease-in-out, top 3s ease-in-out';
+        element.style.left = `${newX}%`;
+        element.style.top = `${newY}%`;
+      }
+    });
+  </script>
+
+  <style>
+    /* 添加交互式滑块样式 */
+    .macro-slider {
+      width: 100%;
+      height: 10px;
+      border-radius: 5px;
+      background: #e0e0e0;
+      outline: none;
+      -webkit-appearance: none;
+      margin: 10px 0;
+      cursor: pointer;
+    }
+    
+    .macro-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--lazy-color);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .macro-slider::-webkit-slider-thumb:hover {
+      background: #E65100;
+      transform: scale(1.1);
+    }
+    
+    .health-assessment {
+      margin-top: 30px;
+      padding: 15px;
+      border-radius: 8px;
+      background-color: #f5f5f5;
+      transition: all 0.3s ease;
+    }
+    
+    .health-assessment h4 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #333;
+    }
+    
+    .assessment-result {
+      display: flex;
+      align-items: center;
+    }
+    
+    .assessment-icon {
+      margin-right: 15px;
+      font-size: 24px;
+      color: #4CAF50;
+    }
+    
+    .assessment-text p {
+      margin: 0;
+      font-size: 14px;
+      color: #666;
+    }
+    
+    /* 动画效果 */
+    @keyframes pulse-assessment {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .pulse-assessment {
+      animation: pulse-assessment 1s ease-in-out;
+    }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // DOM元素
+      const proteinSlider = document.getElementById('protein-slider');
+      const carbsSlider = document.getElementById('carbs-slider');
+      const fatsSlider = document.getElementById('fats-slider');
+      
+      const proteinValue = document.getElementById('protein-value');
+      const carbsValue = document.getElementById('carbs-value');
+      const fatsValue = document.getElementById('fats-value');
+      
+      const proteinBar = document.getElementById('protein-bar');
+      const carbsBar = document.getElementById('carbs-bar');
+      const fatsBar = document.getElementById('fats-bar');
+      
+      const proteinVisual = document.getElementById('protein-visual');
+      const carbsVisual = document.getElementById('carbs-visual');
+      const fatsVisual = document.getElementById('fats-visual');
+      
+      const assessmentMessage = document.getElementById('assessment-message');
+      const assessmentIcon = document.querySelector('.assessment-icon i');
+      const healthAssessment = document.getElementById('health-assessment');
+      
+      // 更新视觉效果和健康评估
+      function updateNutrition() {
+        const proteinPercent = parseInt(proteinSlider.value);
+        const carbsPercent = parseInt(carbsSlider.value);
+        const fatsPercent = parseInt(fatsSlider.value);
+        
+        // 计算总和
+        const total = proteinPercent + carbsPercent + fatsPercent;
+        
+        // 如果总和不等于100，调整值
+        if (total !== 100) {
+          const adjustedProtein = Math.round((proteinPercent / total) * 100);
+          const adjustedCarbs = Math.round((carbsPercent / total) * 100);
+          const adjustedFats = 100 - adjustedProtein - adjustedCarbs;
           
-          // 蛋白质 - 调整大小和角度
-          const proteinSize = 60 + (protein - 30) * 0.8;
-          proteinVisual.style.width = proteinSize + 'px';
-          proteinVisual.style.height = (proteinSize * 0.75) + 'px';
+          // 更新显示值
+          proteinValue.textContent = adjustedProtein;
+          carbsValue.textContent = adjustedCarbs;
+          fatsValue.textContent = adjustedFats;
           
-          // 碳水 - 调整大小和位置
-          const carbsSize = 90 + (carbs - 45) * 0.8;
-          carbsVisual.style.width = carbsSize + 'px';
-          carbsVisual.style.height = carbsSize + 'px';
+          // 更新条形图
+          proteinBar.style.width = adjustedProtein + '%';
+          carbsBar.style.width = adjustedCarbs + '%';
+          fatsBar.style.width = adjustedFats + '%';
           
-          // 脂肪 - 调整大小
-          const fatsSize = 70 + (fats - 25) * 0.8;
-          fatsVisual.style.width = fatsSize + 'px';
-          fatsVisual.style.height = fatsSize + 'px';
+          // 更新视觉食物
+          updateFoodVisual(adjustedProtein, adjustedCarbs, adjustedFats);
+          
+          // 更新健康评估
+          updateHealthAssessment(adjustedProtein, adjustedCarbs, adjustedFats);
+        } else {
+          // 更新显示值
+          proteinValue.textContent = proteinPercent;
+          carbsValue.textContent = carbsPercent;
+          fatsValue.textContent = fatsPercent;
+          
+          // 更新条形图
+          proteinBar.style.width = proteinPercent + '%';
+          carbsBar.style.width = carbsPercent + '%';
+          fatsBar.style.width = fatsPercent + '%';
+          
+          // 更新视觉食物
+          updateFoodVisual(proteinPercent, carbsPercent, fatsPercent);
+          
+          // 更新健康评估
+          updateHealthAssessment(proteinPercent, carbsPercent, fatsPercent);
+        }
+      }
+      
+      // 更新食物视觉效果
+      function updateFoodVisual(protein, carbs, fats) {
+        // 将百分比转换为视觉尺寸
+        const maxSize = 100; // 最大尺寸（基于CSS中的像素）
+        
+        // 蛋白质 - 调整大小和角度
+        const proteinSize = 60 + (protein - 30) * 0.8;
+        proteinVisual.style.width = proteinSize + 'px';
+        proteinVisual.style.height = (proteinSize * 0.75) + 'px';
+        
+        // 碳水 - 调整大小和位置
+        const carbsSize = 90 + (carbs - 45) * 0.8;
+        carbsVisual.style.width = carbsSize + 'px';
+        carbsVisual.style.height = carbsSize + 'px';
+        
+        // 脂肪 - 调整大小
+        const fatsSize = 70 + (fats - 25) * 0.8;
+        fatsVisual.style.width = fatsSize + 'px';
+        fatsVisual.style.height = fatsSize + 'px';
+      }
+      
+      // 更新健康评估
+      function updateHealthAssessment(protein, carbs, fats) {
+        // 添加动画效果
+        healthAssessment.classList.remove('pulse-assessment');
+        void healthAssessment.offsetWidth; // 触发重排
+        healthAssessment.classList.add('pulse-assessment');
+        
+        // 评估标准（简化版）
+        let isHealthy = true;
+        let message = '';
+        
+        // 蛋白质评估
+        if (protein < 15) {
+          isHealthy = false;
+          message = 'Low protein! Aim for at least 15-20% for muscle maintenance.';
+        } else if (protein > 45) {
+          isHealthy = false;
+          message = 'Protein is quite high. Consider more balanced distribution.';
         }
         
-        // 更新健康评估
-        function updateHealthAssessment(protein, carbs, fats) {
-          // 添加动画效果
-          healthAssessment.classList.remove('pulse-assessment');
-          void healthAssessment.offsetWidth; // 触发重排
-          healthAssessment.classList.add('pulse-assessment');
-          
-          // 评估标准（简化版）
-          let isHealthy = true;
-          let message = '';
-          
-          // 蛋白质评估
-          if (protein < 15) {
-            isHealthy = false;
-            message = 'Low protein! Aim for at least 15-20% for muscle maintenance.';
-          } else if (protein > 45) {
-            isHealthy = false;
-            message = 'Protein is quite high. Consider more balanced distribution.';
-          }
-          
-          // 碳水评估
-          if (message === '' && carbs < 20) {
-            isHealthy = false;
-            message = 'Low carbs! This may be a keto-style diet.';
-          } else if (message === '' && carbs > 60) {
-            isHealthy = false;
-            message = 'Carbs are quite high. Consider adding more protein and healthy fats.';
-          }
-          
-          // 脂肪评估
-          if (message === '' && fats < 15) {
-            isHealthy = false;
-            message = 'Low fat! Some healthy fats are essential for hormone function.';
-          } else if (message === '' && fats > 40) {
-            isHealthy = false;
-            message = 'Fat is quite high. Consider reducing for a more balanced meal.';
-          }
-          
-          // 如果一切正常
-          if (message === '') {
-            message = 'Your meal balance is healthy! Good protein, carbs and fat ratio.';
-          }
-          
-          // 更新UI
-          assessmentMessage.textContent = message;
-          
-          if (isHealthy) {
-            assessmentIcon.className = 'fas fa-check-circle';
-            assessmentIcon.style.color = '#4CAF50';
-          } else {
-            assessmentIcon.className = 'fas fa-exclamation-circle';
-            assessmentIcon.style.color = '#FFC107';
-          }
+        // 碳水评估
+        if (message === '' && carbs < 20) {
+          isHealthy = false;
+          message = 'Low carbs! This may be a keto-style diet.';
+        } else if (message === '' && carbs > 60) {
+          isHealthy = false;
+          message = 'Carbs are quite high. Consider adding more protein and healthy fats.';
         }
         
-        // 事件监听器
-        proteinSlider.addEventListener('input', function() {
-          updateNutrition();
-        });
+        // 脂肪评估
+        if (message === '' && fats < 15) {
+          isHealthy = false;
+          message = 'Low fat! Some healthy fats are essential for hormone function.';
+        } else if (message === '' && fats > 40) {
+          isHealthy = false;
+          message = 'Fat is quite high. Consider reducing for a more balanced meal.';
+        }
         
-        carbsSlider.addEventListener('input', function() {
-          updateNutrition();
-        });
+        // 如果一切正常
+        if (message === '') {
+          message = 'Your meal balance is healthy! Good protein, carbs and fat ratio.';
+        }
         
-        fatsSlider.addEventListener('input', function() {
-          updateNutrition();
-        });
+        // 更新UI
+        assessmentMessage.textContent = message;
         
-        // 初始化
+        if (isHealthy) {
+          assessmentIcon.className = 'fas fa-check-circle';
+          assessmentIcon.style.color = '#4CAF50';
+        } else {
+          assessmentIcon.className = 'fas fa-exclamation-circle';
+          assessmentIcon.style.color = '#FFC107';
+        }
+      }
+      
+      // 事件监听器
+      proteinSlider.addEventListener('input', function() {
         updateNutrition();
       });
-    </script>
-  </body>
-  </html>
-  
+      
+      carbsSlider.addEventListener('input', function() {
+        updateNutrition();
+      });
+      
+      fatsSlider.addEventListener('input', function() {
+        updateNutrition();
+      });
+      
+      // 初始化
+      updateNutrition();
+    });
+  </script>
+</body>
+</html>

@@ -3,40 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
   <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400|Source+Sans+Pro:400,600,700" rel="stylesheet">
   <link rel="stylesheet" href="styles/animate.css">
   <link rel="stylesheet" href="styles/icomoon.css">
   <link rel="stylesheet" href="styles/bootstrap.css">
+  <link rel="stylesheet" href="styles/normalize.css" />
+  <link rel="stylesheet" href="styles/styles.css" />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <!-- AOS animation library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <!-- PUT A TITLE IN HERE -->
-    <title>Lazybones Meal Prep</title>
+  <title>Meal Plans - Lazybones Meal Prep</title>
+  <meta name="description" content="Browse our meal plans and nutrition guides for easy meal preparation." />
 
-    <!-- PUT A DESCRIPTION IN HERE -->
-    <meta name="description" content="An interactive nutrition guide to help you create balanced meals." />
+  <style>
+    /* 确保图片不超出容器 */
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    /* 确保页面内容不超出视口 */
+    body, html {
+      width: 100%;
+      overflow-x: hidden;
+    }
+  </style>
 
-    <!-- LINK TO NORMALIZE (FOR CONSISTENCY) -->
-    <link rel="stylesheet" href="styles/normalize.css" />
-
-    <!-- LINK TO ANY FRAMEWORK STYLES HERE -->
-    <link rel="stylesheet" href="styles/framework.css" /> <!-- optional if you add Bootstrap or other -->
-
-    <!-- LINK TO YOUR STYLES -->
-    <link rel="stylesheet" href="styles/styles.css" />
-
-    <!-- LINK TO EXTERNAL JS LIBRARIES HERE -->
-
-    <!-- LINK TO YOUR JS HERE. NOTE THE DEFER ATTRIBUTE. -->
-    <script src="scripts/scripts.js" defer></script>
-
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <!-- AOS animation library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="scripts/scripts.js" defer></script>
   </head>
 
-   <body>
+  <body>
     <div id="page">
       <!-- Navbar -->
       <nav class="fh5co-nav" role="navigation">
@@ -57,15 +57,35 @@
                 <li><a href="about.html">ABOUT</a></li>
               </ul>
             </div>
+            <!-- 汉堡菜单按钮 -->
+            <div class="hamburger-menu">
+              <div class="hamburger-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
           </div>
         </div>
       </nav>
+  
+      <!-- 移动端菜单覆盖层 -->
+      <div class="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+          <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="learn.html" class="active">MEAL PLANS</a></li>
+            <li><a href="start.html">CALCULATOR</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+          </ul>
+        </div>
+      </div>
   
       <!-- Meal Plans Header -->
       <div id="meal-plans-header" class="fh5co-bg-section">
         <div class="container">
           <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+            <div class="col-md-12 text-center fh5co-heading">
               <h2>MEAL PLANS</h2>
               <p>Browse our collection of balanced meal plans designed for different goals</p>
             </div>
@@ -202,7 +222,7 @@
       <div id="sample-meals" class="fh5co-bg-section">
         <div class="container">
           <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+            <div class="col-md-12 text-center fh5co-heading">
               <h2>SAMPLE MEALS</h2>
               <p>Here are some examples of balanced meals from our plans</p>
             </div>
@@ -264,7 +284,7 @@
       <div id="cta-section">
         <div class="container">
           <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-center" data-aos="fade-up">
+            <div class="col-md-12 text-center" data-aos="fade-up">
               <h2>READY TO GET STARTED?</h2>
               <p>Generate your personalized meal plan in just a few clicks</p>
               <a href="start.html" class="btn btn-primary btn-lg pulse-button">CREATE MY PLAN</a>
@@ -313,6 +333,7 @@
         });
       });
     </script>
+    <script src="scripts/scripts.js"></script>
+
   </body>
 </html>
-  

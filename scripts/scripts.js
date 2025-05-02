@@ -1,136 +1,158 @@
 /* WRITE YOUR JS HERE... YOU MAY REQUIRE MORE THAN ONE JS FILE. IF SO SAVE IT SEPARATELY IN THE SCRIPTS DIRECTORY */
 /* Lazybones Meal Prep - Nutrition Calculator */
 document.addEventListener('DOMContentLoaded', function() {
+  // 检查并初始化页面所需的组件
+  initPageComponents();
+});
+
+/**
+* 初始化页面组件
+*/
+function initPageComponents() {
+  // 初始化营养计算器表单（如果存在）
+  initNutritionCalculator();
+  
+  // 初始化打印按钮（如果存在）
+  initPrintFunctionality();
+  
+  // 初始化汉堡菜单
+  initHamburgerMenu();
+}
+
+/**
+* 初始化营养计算器
+*/
+function initNutritionCalculator() {
   const form = document.getElementById('mealPrepForm');
   
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Get form values
-    const gender = document.getElementById('gender').value;
-    const age = parseFloat(document.getElementById('age').value);
-    let weight = parseFloat(document.getElementById('weight').value);
-    let height = parseFloat(document.getElementById('height').value);
-    const meals = parseInt(document.getElementById('meals').value);
-    const activityLevel = parseFloat(document.getElementById('activity').value);
-    const goal = document.getElementById('goal').value;
-    
-    // Validate inputs
-    if (!gender || isNaN(age) || isNaN(weight) || isNaN(height) || isNaN(meals) || isNaN(activityLevel) || !goal) {
-      alert('Please fill all fields with valid values');
-      return;
-    }
-    
-    // Check if we need to convert from imperial to metric for calculations
-    const isImperial = document.getElementById('unitImperial').classList.contains('active');
-    
-    if (isImperial) {
-      // Convert pounds to kg for calculations
-      weight = weight / 2.20462;
-      
-      // Convert inches to cm for calculations
-      height = height * 2.54;
-    }
-    
-    // Calculate BMR using Mifflin-St Jeor Equation
-    let bmr;
-    if (gender === 'male') {
-      bmr = 10 * weight + 6.25 * height - 5 * age + 5;
-    } else {
-      bmr = 10 * weight + 6.25 * height - 5 * age - 161;
-    }
-    
-    // Calculate TDEE
-    const tdee = bmr * activityLevel;
-    
-    // Adjust calories based on goal
-    let calories;
-    let proteinPercent, carbsPercent, fatPercent;
-    
-    if (goal === 'loss') {
-      calories = tdee - 500;
-      proteinPercent = 40;
-      carbsPercent = 30;
-      fatPercent = 30;
-    } else if (goal === 'maintain') {
-      calories = tdee;
-      proteinPercent = 30;
-      carbsPercent = 40;
-      fatPercent = 30;
-    } else if (goal === 'gain') {
-      calories = tdee + 400;
-      proteinPercent = 30;
-      carbsPercent = 50;
-      fatPercent = 20;
-    }
-    
-    // Calculate macronutrients in grams
-    const proteinGrams = Math.round((calories * (proteinPercent/100)) / 4);
-    const carbsGrams = Math.round((calories * (carbsPercent/100)) / 4);
-    const fatGrams = Math.round((calories * (fatPercent/100)) / 9);
-    
-    // Calculate per meal breakdown
-    const caloriesPerMeal = Math.round(calories / meals);
-    const proteinPerMeal = Math.round(proteinGrams / meals);
-    const carbsPerMeal = Math.round(carbsGrams / meals);
-    const fatPerMeal = Math.round(fatGrams / meals);
-    
-    // Display results
-    document.getElementById('bmrResult').textContent = Math.round(bmr);
-    document.getElementById('tdeeResult').textContent = Math.round(tdee);
-    document.getElementById('calorieResult').textContent = Math.round(calories);
-    
-    document.getElementById('proteinResult').textContent = proteinGrams;
-    document.getElementById('carbsResult').textContent = carbsGrams;
-    document.getElementById('fatResult').textContent = fatGrams;
-    
-    document.getElementById('proteinPercent').textContent = proteinPercent;
-    document.getElementById('carbsPercent').textContent = carbsPercent;
-    document.getElementById('fatPercent').textContent = fatPercent;
-    
-    document.getElementById('mealsPerDay').textContent = meals;
-    document.getElementById('caloriesPerMeal').textContent = caloriesPerMeal;
-    document.getElementById('proteinPerMeal').textContent = proteinPerMeal;
-    document.getElementById('carbsPerMeal').textContent = carbsPerMeal;
-    document.getElementById('fatPerMeal').textContent = fatPerMeal;
-    
-    // Update macro bar visualization
-    document.getElementById('proteinBar').style.width = proteinPercent + '%';
-    document.getElementById('carbsBar').style.width = carbsPercent + '%';
-    document.getElementById('fatBar').style.width = fatPercent + '%';
-    
-    // Add animation classes
-    const proteinBar = document.getElementById('proteinBar');
-    const carbsBar = document.getElementById('carbsBar');
-    const fatBar = document.getElementById('fatBar');
-    
-    // Reset animations
-    proteinBar.style.animation = 'none';
-    carbsBar.style.animation = 'none';
-    fatBar.style.animation = 'none';
-    
-    // Trigger reflow
-    void proteinBar.offsetWidth;
-    void carbsBar.offsetWidth;
-    void fatBar.offsetWidth;
-    
-    // Re-add animations
-    proteinBar.style.animation = '';
-    carbsBar.style.animation = '';
-    fatBar.style.animation = '';
-    
-    // Show results section
-    document.getElementById('results').style.display = 'block';
-    
-    // Scroll to results
-    document.getElementById('results').scrollIntoView({
-      behavior: 'smooth'
-    });
-  });
-
-  // 初始化打印按钮事件处理器
-  initPrintFunctionality();
-});
+  // 只有在表单存在的情况下添加事件监听器
+  if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form values
+        const gender = document.getElementById('gender').value;
+        const age = parseFloat(document.getElementById('age').value);
+        let weight = parseFloat(document.getElementById('weight').value);
+        let height = parseFloat(document.getElementById('height').value);
+        const meals = parseInt(document.getElementById('meals').value);
+        const activityLevel = parseFloat(document.getElementById('activity').value);
+        const goal = document.getElementById('goal').value;
+        
+        // Validate inputs
+        if (!gender || isNaN(age) || isNaN(weight) || isNaN(height) || isNaN(meals) || isNaN(activityLevel) || !goal) {
+          alert('Please fill all fields with valid values');
+          return;
+        }
+        
+        // Check if we need to convert from imperial to metric for calculations
+        const isImperial = document.getElementById('unitImperial').classList.contains('active');
+        
+        if (isImperial) {
+          // Convert pounds to kg for calculations
+          weight = weight / 2.20462;
+          
+          // Convert inches to cm for calculations
+          height = height * 2.54;
+        }
+        
+        // Calculate BMR using Mifflin-St Jeor Equation
+        let bmr;
+        if (gender === 'male') {
+          bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+        } else {
+          bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+        }
+        
+        // Calculate TDEE
+        const tdee = bmr * activityLevel;
+        
+        // Adjust calories based on goal
+        let calories;
+        let proteinPercent, carbsPercent, fatPercent;
+        
+        if (goal === 'loss') {
+          calories = tdee - 500;
+          proteinPercent = 40;
+          carbsPercent = 30;
+          fatPercent = 30;
+        } else if (goal === 'maintain') {
+          calories = tdee;
+          proteinPercent = 30;
+          carbsPercent = 40;
+          fatPercent = 30;
+        } else if (goal === 'gain') {
+          calories = tdee + 400;
+          proteinPercent = 30;
+          carbsPercent = 50;
+          fatPercent = 20;
+        }
+        
+        // Calculate macronutrients in grams
+        const proteinGrams = Math.round((calories * (proteinPercent/100)) / 4);
+        const carbsGrams = Math.round((calories * (carbsPercent/100)) / 4);
+        const fatGrams = Math.round((calories * (fatPercent/100)) / 9);
+        
+        // Calculate per meal breakdown
+        const caloriesPerMeal = Math.round(calories / meals);
+        const proteinPerMeal = Math.round(proteinGrams / meals);
+        const carbsPerMeal = Math.round(carbsGrams / meals);
+        const fatPerMeal = Math.round(fatGrams / meals);
+        
+        // Display results
+        document.getElementById('bmrResult').textContent = Math.round(bmr);
+        document.getElementById('tdeeResult').textContent = Math.round(tdee);
+        document.getElementById('calorieResult').textContent = Math.round(calories);
+        
+        document.getElementById('proteinResult').textContent = proteinGrams;
+        document.getElementById('carbsResult').textContent = carbsGrams;
+        document.getElementById('fatResult').textContent = fatGrams;
+        
+        document.getElementById('proteinPercent').textContent = proteinPercent;
+        document.getElementById('carbsPercent').textContent = carbsPercent;
+        document.getElementById('fatPercent').textContent = fatPercent;
+        
+        document.getElementById('mealsPerDay').textContent = meals;
+        document.getElementById('caloriesPerMeal').textContent = caloriesPerMeal;
+        document.getElementById('proteinPerMeal').textContent = proteinPerMeal;
+        document.getElementById('carbsPerMeal').textContent = carbsPerMeal;
+        document.getElementById('fatPerMeal').textContent = fatPerMeal;
+        
+        // Update macro bar visualization
+        document.getElementById('proteinBar').style.width = proteinPercent + '%';
+        document.getElementById('carbsBar').style.width = carbsPercent + '%';
+        document.getElementById('fatBar').style.width = fatPercent + '%';
+        
+        // Add animation classes
+        const proteinBar = document.getElementById('proteinBar');
+        const carbsBar = document.getElementById('carbsBar');
+        const fatBar = document.getElementById('fatBar');
+        
+        // Reset animations
+        proteinBar.style.animation = 'none';
+        carbsBar.style.animation = 'none';
+        fatBar.style.animation = 'none';
+        
+        // Trigger reflow
+        void proteinBar.offsetWidth;
+        void carbsBar.offsetWidth;
+        void fatBar.offsetWidth;
+        
+        // Re-add animations
+        proteinBar.style.animation = '';
+        carbsBar.style.animation = '';
+        fatBar.style.animation = '';
+        
+        // Show results section
+        document.getElementById('results').style.display = 'block';
+        
+        // Scroll to results
+        document.getElementById('results').scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+  }
+}
 
 /**
 * 初始化打印功能
@@ -438,4 +460,68 @@ frame.onload = function() {
     }
   }, 1000);
 };
+}
+
+/**
+* 初始化汉堡菜单功能
+*/
+function initHamburgerMenu() {
+const hamburgerMenu = document.querySelector('.hamburger-menu');
+const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+
+if (hamburgerMenu && mobileMenuOverlay) {
+  // 点击汉堡图标打开菜单
+  hamburgerMenu.addEventListener('click', function() {
+    const hamburgerIcon = this.querySelector('.hamburger-icon');
+    hamburgerIcon.classList.toggle('open');
+    
+    if (mobileMenuOverlay.style.display === 'block') {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+  
+  // 点击菜单项关闭菜单
+  const menuItems = mobileMenuOverlay.querySelectorAll('a');
+  menuItems.forEach(item => {
+    item.addEventListener('click', closeMenu);
+  });
+  
+  // 点击ESC键关闭菜单
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && mobileMenuOverlay.style.display === 'block') {
+      closeMenu();
+    }
+  });
+}
+
+/**
+ * 打开移动菜单
+ */
+function openMenu() {
+  mobileMenuOverlay.style.display = 'block';
+  document.body.style.overflow = 'hidden'; // 防止背景滚动
+  
+  // 添加过渡动画
+  setTimeout(() => {
+    mobileMenuOverlay.style.opacity = '1';
+  }, 10);
+}
+
+/**
+ * 关闭移动菜单
+ */
+function closeMenu() {
+  const hamburgerIcon = hamburgerMenu.querySelector('.hamburger-icon');
+  hamburgerIcon.classList.remove('open');
+  
+  mobileMenuOverlay.style.opacity = '0';
+  
+  // 延迟隐藏以完成过渡
+  setTimeout(() => {
+    mobileMenuOverlay.style.display = 'none';
+    document.body.style.overflow = ''; // 恢复背景滚动
+  }, 300);
+}
 }

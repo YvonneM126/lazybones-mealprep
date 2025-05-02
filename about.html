@@ -1,43 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>About Us - Lazybones Meal Prep</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400|Source+Sans+Pro:400,600,700" rel="stylesheet">
   <link rel="stylesheet" href="styles/animate.css">
   <link rel="stylesheet" href="styles/icomoon.css">
   <link rel="stylesheet" href="styles/bootstrap.css">
-
-    <!-- PUT A TITLE IN HERE -->
-    <title>Lazybones Meal Prep</title>
-
-    <!-- PUT A DESCRIPTION IN HERE -->
-    <meta name="description" content="An interactive nutrition guide to help you create balanced meals." />
-
-    <!-- LINK TO NORMALIZE (FOR CONSISTENCY) -->
-    <link rel="stylesheet" href="styles/normalize.css" />
-
-    <!-- LINK TO ANY FRAMEWORK STYLES HERE -->
-    <link rel="stylesheet" href="styles/framework.css" /> <!-- optional if you add Bootstrap or other -->
-
-    <!-- LINK TO YOUR STYLES -->
-    <link rel="stylesheet" href="styles/styles.css" />
-
-    <!-- LINK TO EXTERNAL JS LIBRARIES HERE -->
-
-    <!-- LINK TO YOUR JS HERE. NOTE THE DEFER ATTRIBUTE. -->
-    <script src="scripts/scripts.js" defer></script>
-
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <!-- AOS animation library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  </head>
+  <link rel="stylesheet" href="styles/normalize.css">
+  <link rel="stylesheet" href="styles/styles.css">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <!-- AOS animation library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
   <style>
     /* About Page Specific Styles */
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    
     .about-hero {
       padding: 80px 0 40px;
       position: relative;
@@ -212,15 +199,35 @@
               <li><a href="about.html" class="active">ABOUT</a></li>
             </ul>
           </div>
+          <!-- 汉堡菜单按钮 -->
+          <div class="hamburger-menu">
+            <div class="hamburger-icon">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
+
+    <!-- 移动端菜单覆盖层 -->
+    <div class="mobile-menu-overlay">
+      <div class="mobile-menu-content">
+        <ul>
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="learn.html">MEAL PLANS</a></li>
+          <li><a href="start.html">CALCULATOR</a></li>
+          <li><a href="about.html" class="active">ABOUT</a></li>
+        </ul>
+      </div>
+    </div>
 
     <!-- About Header -->
     <div id="calculator-header" class="fh5co-bg-section about-hero">
       <div class="container">
         <div class="row">
-          <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+          <div class="col-md-12 text-center fh5co-heading">
             <h2>ABOUT LAZY BONES</h2>
             <p>Meet the team behind your favorite meal planning tool</p>
           </div>
@@ -292,8 +299,6 @@
       </div>
     </div>
 
- 
-
     <!-- Footer -->
     <footer id="fh5co-footer" role="contentinfo">
       <div class="container">
@@ -334,6 +339,7 @@
       });
     });
   </script>
+  <script src="scripts/scripts.js"></script>
 </body>
 </html>
   

@@ -1,745 +1,746 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Nutrition Calculator - Lazybones Meal Prep</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400|Source+Sans+Pro:400,600,700" rel="stylesheet">
   <link rel="stylesheet" href="styles/animate.css">
   <link rel="stylesheet" href="styles/icomoon.css">
   <link rel="stylesheet" href="styles/bootstrap.css">
+  <link rel="stylesheet" href="styles/normalize.css">
+  <link rel="stylesheet" href="styles/styles.css">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <!-- AOS animation library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <!-- PUT A TITLE IN HERE -->
-    <title>Lazybones Meal Prep</title>
-
-    <!-- PUT A DESCRIPTION IN HERE -->
-    <meta name="description" content="An interactive nutrition guide to help you create balanced meals." />
-
-    <!-- LINK TO NORMALIZE (FOR CONSISTENCY) -->
-    <link rel="stylesheet" href="styles/normalize.css" />
-
-    <!-- LINK TO ANY FRAMEWORK STYLES HERE -->
-    <link rel="stylesheet" href="styles/framework.css" /> <!-- optional if you add Bootstrap or other -->
-
-    <!-- LINK TO YOUR STYLES -->
-    <link rel="stylesheet" href="styles/styles.css" />
-
-    <!-- LINK TO EXTERNAL JS LIBRARIES HERE -->
-
-    <!-- LINK TO YOUR JS HERE. NOTE THE DEFER ATTRIBUTE. -->
-    <script src="scripts/scripts.js" defer></script>
+  <style>
+    /* Calculator Styles */
+    #results {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      margin-top: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      display: none;
+      transform: translateY(20px);
+      animation: slideUp 0.5s forwards;
+    }
     
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <!-- AOS animation library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    #results h3 {
+      color: #8BC34A;
+      margin-bottom: 30px;
+      font-size: 26px;
+      font-weight: 700;
+    }
+    
+    .result-item {
+      margin-bottom: 25px;
+      position: relative;
+    }
+    
+    .result-item strong {
+      font-weight: 600;
+      color: #444;
+      font-size: 17px;
+      display: block;
+      margin-bottom: 5px;
+    }
+    
+    .result-item .info-icon {
+      color: #8BC34A;
+      cursor: pointer;
+      margin-left: 5px;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+    
+    .result-item .info-icon:hover {
+      color: #F57C00;
+    }
+    
+    .tooltip-text {
+      display: none;
+      position: absolute;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      width: 220px;
+      z-index: 100;
+      top: 30px;
+      left: 0;
+    }
+    
+    .info-icon:hover + .tooltip-text {
+      display: block;
+    }
+    
+    .macro-bar {
+      height: 30px;
+      margin-top: 15px;
+      border-radius: 15px;
+      overflow: hidden;
+      display: flex;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+    
+    .protein-bar {
+      background-color: #FF5722;
+      position: relative;
+      min-width: 10%;
+    }
+    
+    .carbs-bar {
+      background-color: #2196F3;
+      position: relative;
+      min-width: 10%;
+    }
+    
+    .fat-bar {
+      background-color: #FFEB3B;
+      position: relative;
+      min-width: 10%;
+    }
+    
+    .macro-legend {
+      display: flex;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+    
+    .legend-item {
+      margin-right: 20px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .legend-color {
+      width: 15px;
+      height: 15px;
+      margin-right: 8px;
+      border-radius: 3px;
+    }
+    
+    .calculator-form {
+      background-color: white;
+      border-radius: 12px;
+      padding: 35px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      transform: translateY(30px);
+      position: relative;
+      z-index: 10;
+    }
+    
+    .calculator-character {
+      position: absolute;
+      right: -80px;
+      top: -100px;
+      width: 150px;
+      z-index: 11;
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    .form-title {
+      font-size: 28px;
+      margin-bottom: 25px;
+      color: #333;
+      text-align: center;
+      font-weight: 700;
+    }
+    
+    .form-subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 17px;
+    }
+    
+    .lazy-icon {
+      font-size: 40px;
+      color: #F57C00;
+      margin-bottom: 20px;
+      text-align: center;
+      display: block;
+    }
+    
+    .form-group {
+      margin-bottom: 25px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #555;
+    }
+    
+    .form-control {
+      height: 50px;
+      border: 2px solid #e0e0e0;
+      transition: all 0.3s;
+      font-size: 16px;
+    }
+    
+    .form-control:focus {
+      border-color: #8BC34A;
+      box-shadow: 0 0 0 3px rgba(139, 195, 74, 0.2);
+    }
+    
+    .unit-selector {
+      display: flex;
+      border: 2px solid #e0e0e0;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    
+    .unit-btn {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      background: #f5f5f5;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .unit-btn.active {
+      background: #8BC34A;
+      color: white;
+    }
+    
+    .calculator-footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #777;
+      text-align: center;
+    }
+    
+    .calculator-card {
+      background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-left: 4px solid #8BC34A;
+    }
+    
+    .calculator-card h4 {
+      margin-top: 0;
+      font-size: 18px;
+      color: #333;
+    }
+    
+    .calculator-card p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 0;
+    }
+    
+    /* Buttons */
+    .btn-lazy {
+      background-color: #F57C00;
+      color: white;
+      border: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .btn-lazy:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: all 0.4s;
+      z-index: -1;
+    }
+    
+    .btn-lazy:hover:before {
+      left: 100%;
+    }
+    
+    .btn-lazy:hover {
+      background-color: #E65100;
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Toggle Switch */
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+      margin: 0;
+    }
+    
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 24px;
+    }
+    
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .toggle-slider {
+      background-color: #8BC34A;
+    }
+    
+    input:checked + .toggle-slider:before {
+      transform: translateX(26px);
+    }
+    
+    /* Horizontal rules */
+    hr.stylish {
+      border: 0;
+      height: 1px;
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+      margin: 30px 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="page">
+    <!-- Navbar -->
+    <nav class="fh5co-nav" role="navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-3 logo-container">
+            <!-- Logo with pulse animation -->
+            <div class="logo pulse">
+              <span class="logo-icon"><i class="fas fa-utensils"></i></span>
+              <span class="logo-text">Lazy Bones</span>
+            </div>
+          </div>
+          <div class="col-xs-9 text-right menu-1">
+            <ul>
+              <li><a href="index.html">HOME</a></li>
+              <li><a href="learn.html">MEAL PLANS</a></li>
+              <li><a href="start.html" class="active">CALCULATOR</a></li>
+              <li><a href="about.html">ABOUT</a></li>
+            </ul>
+          </div>
+          <!-- 汉堡菜单按钮 -->
+          <div class="hamburger-menu">
+            <div class="hamburger-icon">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
 
-    <style>
-      /* Calculator Styles */
-      #results {
-        background-color: #fff;
-        border-radius: 12px;
-        padding: 30px;
-        margin-top: 30px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        display: none;
-        transform: translateY(20px);
-        animation: slideUp 0.5s forwards;
-      }
-      
-      @keyframes slideUp {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      
-      #results h3 {
-        color: #8BC34A;
-        margin-bottom: 30px;
-        font-size: 26px;
-        font-weight: 700;
-      }
-      
-      .result-item {
-        margin-bottom: 25px;
-        position: relative;
-      }
-      
-      .result-item strong {
-        font-weight: 600;
-        color: #444;
-        font-size: 17px;
-        display: block;
-        margin-bottom: 5px;
-      }
-      
-      .result-item .info-icon {
-        color: #8BC34A;
-        cursor: pointer;
-        margin-left: 5px;
-        font-size: 16px;
-        transition: all 0.3s;
-      }
-      
-      .result-item .info-icon:hover {
-        color: #F57C00;
-      }
-      
-      .tooltip-text {
-        display: none;
-        position: absolute;
-        background: rgba(0, 0, 0, 0.8);
-        color: #fff;
-        padding: 10px;
-        border-radius: 5px;
-        font-size: 12px;
-        width: 220px;
-        z-index: 100;
-        top: 30px;
-        left: 0;
-      }
-      
-      .info-icon:hover + .tooltip-text {
-        display: block;
-      }
-      
-      .macro-bar {
-        height: 30px;
-        margin-top: 15px;
-        border-radius: 15px;
-        overflow: hidden;
-        display: flex;
-        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
-        position: relative;
-      }
-      
-      .protein-bar {
-        background-color: #FF5722;
-        position: relative;
-        min-width: 10%;
-      }
-      
-      .carbs-bar {
-        background-color: #2196F3;
-        position: relative;
-        min-width: 10%;
-      }
-      
-      .fat-bar {
-        background-color: #FFEB3B;
-        position: relative;
-        min-width: 10%;
-      }
-      
-      .macro-legend {
-        display: flex;
-        margin-top: 12px;
-        font-size: 14px;
-      }
-      
-      .legend-item {
-        margin-right: 20px;
-        display: flex;
-        align-items: center;
-      }
-      
-      .legend-color {
-        width: 15px;
-        height: 15px;
-        margin-right: 8px;
-        border-radius: 3px;
-      }
-      
-      .calculator-form {
-        background-color: white;
-        border-radius: 12px;
-        padding: 35px;
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-        transform: translateY(30px);
-        position: relative;
-        z-index: 10;
-      }
-      
-      .calculator-character {
-        position: absolute;
-        right: -80px;
-        top: -100px;
-        width: 150px;
-        z-index: 11;
-        animation: float 3s ease-in-out infinite;
-      }
-      
-      @keyframes float {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-15px); }
-        100% { transform: translateY(0px); }
-      }
-      
-      .form-title {
-        font-size: 28px;
-        margin-bottom: 25px;
-        color: #333;
-        text-align: center;
-        font-weight: 700;
-      }
-      
-      .form-subtitle {
-        text-align: center;
-        color: #666;
-        margin-bottom: 30px;
-        font-size: 17px;
-      }
-      
-      .lazy-icon {
-        font-size: 40px;
-        color: #F57C00;
-        margin-bottom: 20px;
-        text-align: center;
-        display: block;
-      }
-      
-      .form-group {
-        margin-bottom: 25px;
-      }
-      
-      .form-group label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: 600;
-        color: #555;
-      }
-      
-      .form-control {
-        height: 50px;
-        border: 2px solid #e0e0e0;
-        transition: all 0.3s;
-        font-size: 16px;
-      }
-      
-      .form-control:focus {
-        border-color: #8BC34A;
-        box-shadow: 0 0 0 3px rgba(139, 195, 74, 0.2);
-      }
-      
-      .unit-selector {
-        display: flex;
-        border: 2px solid #e0e0e0;
-        border-radius: 4px;
-        overflow: hidden;
-        margin-bottom: 20px;
-      }
-      
-      .unit-btn {
-        flex: 1;
-        padding: 10px;
-        text-align: center;
-        background: #f5f5f5;
-        border: none;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-      
-      .unit-btn.active {
-        background: #8BC34A;
-        color: white;
-      }
-      
-      .calculator-footer {
-        margin-top: 30px;
-        font-size: 14px;
-        color: #777;
-        text-align: center;
-      }
-      
-      .calculator-card {
-        background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
-        border-radius: 8px;
-        padding: 15px;
-        margin-bottom: 20px;
-        border-left: 4px solid #8BC34A;
-      }
-      
-      .calculator-card h4 {
-        margin-top: 0;
-        font-size: 18px;
-        color: #333;
-      }
-      
-      .calculator-card p {
-        font-size: 14px;
-        color: #666;
-        margin-bottom: 0;
-      }
-      
-      /* Buttons */
-      .btn-lazy {
-        background-color: #F57C00;
-        color: white;
-        border: none;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        z-index: 1;
-      }
-      
-      .btn-lazy:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-        transition: all 0.4s;
-        z-index: -1;
-      }
-      
-      .btn-lazy:hover:before {
-        left: 100%;
-      }
-      
-      .btn-lazy:hover {
-        background-color: #E65100;
-        color: white;
-        transform: translateY(-3px);
-        box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1);
-      }
-      
-      /* Toggle Switch */
-      .toggle-switch {
-        position: relative;
-        display: inline-block;
-        width: 50px;
-        height: 24px;
-        margin: 0;
-      }
-      
-      .toggle-switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-      }
-      
-      .toggle-slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        transition: .4s;
-        border-radius: 24px;
-      }
-      
-      .toggle-slider:before {
-        position: absolute;
-        content: "";
-        height: 16px;
-        width: 16px;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
-        transition: .4s;
-        border-radius: 50%;
-      }
-      
-      input:checked + .toggle-slider {
-        background-color: #8BC34A;
-      }
-      
-      input:checked + .toggle-slider:before {
-        transform: translateX(26px);
-      }
-      
-      /* Horizontal rules */
-      hr.stylish {
-        border: 0;
-        height: 1px;
-        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
-        margin: 30px 0;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="page">
-      <!-- Navbar -->
-      <nav class="fh5co-nav" role="navigation">
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-3 logo-container">
-              <!-- Logo with pulse animation -->
-              <div class="logo pulse">
-                <span class="logo-icon"><i class="fas fa-utensils"></i></span>
-                <span class="logo-text">Lazy Bones</span>
-              </div>
-            </div>
-            <div class="col-xs-9 text-right menu-1">
-              <ul>
-                <li><a href="index.html">HOME</a></li>
-                <li><a href="learn.html">MEAL PLANS</a></li>
-                <li><a href="start.html" class="active">CALCULATOR</a></li>
-                <li><a href="about.html">ABOUT</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </nav>
-  
-      <!-- Calculator Header -->
-      <div id="calculator-header" class="fh5co-bg-section">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-              <h2>TOO LAZY TO COUNT CALORIES?</h2>
-              <p>Let our calculator do the work for you. Just tell us a few things about yourself!</p>
-            </div>
-          </div>
-        </div>
+    <!-- 移动端菜单覆盖层 -->
+    <div class="mobile-menu-overlay">
+      <div class="mobile-menu-content">
+        <ul>
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="learn.html">MEAL PLANS</a></li>
+          <li><a href="start.html" class="active">CALCULATOR</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+        </ul>
       </div>
-  
-      <!-- Calculator Form Section -->
-      <div id="calculator-section">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8 col-md-offset-2" data-aos="fade-up">
-              <div class="calculator-form">
-                <img src="images/ch.png" alt="Lazy Bones Character" class="calculator-character">
-                <h3 class="form-title">Nutrition Calculator</h3>
-                <p class="form-subtitle">Even lazybones deserve good nutrition. Let's figure out what you need!</p>
-                
-                <div class="calculator-card">
-                  <h4>How Does This Work?</h4>
-                  <p>We use the Mifflin-St Jeor Equation to calculate your Basal Metabolic Rate (BMR), which is the calories your body burns at rest. Then we factor in your activity level to determine your Total Daily Energy Expenditure (TDEE). Based on your goals, we recommend calorie and macronutrient targets.</p>
-                </div>
-                
-                <form id="mealPrepForm">
-                  <!-- Units Toggle -->
-                  <div class="form-group">
-                    <label>Unit Preference:</label>
-                    <div class="unit-selector">
-                      <button type="button" id="unitMetric" class="unit-btn active">Metric (kg/cm)</button>
-                      <button type="button" id="unitImperial" class="unit-btn">Imperial (lb/in)</button>
-                    </div>
-                  </div>
-                  
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="gender">Gender:</label>
-                        <select id="gender" class="form-control" required>
-                          <option value="">Select</option>
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="age">Age:</label>
-                        <input type="number" id="age" class="form-control" placeholder="Years" required min="15" max="100">
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label id="weightLabel" for="weight">Weight (kg):</label>
-                        <input type="number" id="weight" class="form-control" placeholder="Weight" required min="30" max="300">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label id="heightLabel" for="height">Height (cm):</label>
-                        <input type="number" id="height" class="form-control" placeholder="Height" required min="100" max="250">
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="activity">Activity Level:</label>
-                        <select id="activity" class="form-control" required>
-                          <option value="">Select</option>
-                          <option value="1.2">Sedentary (office job, rarely exercise)</option>
-                          <option value="1.375">Lightly Active (light exercise 1-3 days/week)</option>
-                          <option value="1.55">Moderately Active (moderate exercise 3-5 days/week)</option>
-                          <option value="1.725">Very Active (hard exercise 6-7 days/week)</option>
-                          <option value="1.9">Extremely Active (physical job & hard training)</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="goal">Fitness Goal:</label>
-                        <select id="goal" class="form-control" required>
-                          <option value="">Select</option>
-                          <option value="loss">Fat Loss (calorie deficit)</option>
-                          <option value="maintain">Maintenance (maintain current weight)</option>
-                          <option value="gain">Muscle Gain (calorie surplus)</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="meals">Meals Per Day:</label>
-                    <select id="meals" class="form-control" required>
-                      <option value="">Select</option>
-                      <option value="3">3 meals</option>
-                      <option value="4">4 meals</option>
-                      <option value="5">5 meals</option>
-                      <option value="6">6 meals</option>
-                    </select>
-                  </div>
-                  
-                  <div class="form-group text-center">
-                    <button type="submit" class="btn btn-lazy btn-lg">
-                      <i class="fas fa-calculator"></i> Calculate My Macros
-                    </button>
-                  </div>
-                </form>
-  
-                <div class="calculator-footer">
-                  <p>* This calculator provides estimates based on formulas. Individual needs may vary.</p>
-                </div>
-  
-                <!-- Results section -->
-                <div id="results" data-aos="fade-up">
-                  <h3 class="text-center">Your Personalized Nutrition Plan</h3>
-                  
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="result-item">
-                        <strong>
-                          BMR (Basal Metabolic Rate):
-                          <i class="fas fa-info-circle info-icon"></i>
-                        </strong>
-                        <div class="tooltip-text">BMR is the number of calories your body burns at complete rest to maintain vital functions.</div>
-                        <div><span id="bmrResult"></span> calories/day</div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="result-item">
-                        <strong>
-                          TDEE (Total Daily Energy):
-                          <i class="fas fa-info-circle info-icon"></i>
-                        </strong>
-                        <div class="tooltip-text">TDEE includes your BMR plus the calories you burn through daily activity and exercise.</div>
-                        <div><span id="tdeeResult"></span> calories/day</div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="result-item">
-                    <strong>
-                      Daily Calorie Target:
-                      <i class="fas fa-info-circle info-icon"></i>
-                    </strong>
-                    <div class="tooltip-text">Based on your goal, we've adjusted your daily calorie intake to help you achieve your desired results.</div>
-                    <div><span id="calorieResult"></span> calories/day</div>
-                  </div>
-                  
-                  <hr class="stylish">
-                  
-                  <div class="result-item">
-                    <strong>
-                      Macronutrient Distribution:
-                      <i class="fas fa-info-circle info-icon"></i>
-                    </strong>
-                    <div class="tooltip-text">Macronutrients are the nutrients your body needs in large amounts: protein, carbohydrates, and fats.</div>
-                    <div class="macro-bar">
-                      <div class="protein-bar" id="proteinBar"></div>
-                      <div class="carbs-bar" id="carbsBar"></div>
-                      <div class="fat-bar" id="fatBar"></div>
-                    </div>
-                    <div class="macro-legend">
-                      <div class="legend-item">
-                        <div class="legend-color protein-bar"></div>
-                        <span>Protein</span>
-                      </div>
-                      <div class="legend-item">
-                        <div class="legend-color carbs-bar"></div>
-                        <span>Carbs</span>
-                      </div>
-                      <div class="legend-item">
-                        <div class="legend-color fat-bar"></div>
-                        <span>Fats</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="result-item">
-                        <strong>
-                          Daily Protein:
-                          <i class="fas fa-info-circle info-icon"></i>
-                        </strong>
-                        <div class="tooltip-text">Protein is crucial for muscle repair and growth. 1g of protein = 4 calories.</div>
-                        <div><span id="proteinResult"></span> g (<span id="proteinPercent"></span>%)</div>
-                      </div>
-                    </div>
-                    
-                    <div class="col-md-4">
-                      <div class="result-item">
-                        <strong>
-                          Daily Carbs:
-                          <i class="fas fa-info-circle info-icon"></i>
-                        </strong>
-                        <div class="tooltip-text">Carbohydrates are your body's main energy source. 1g of carbs = 4 calories.</div>
-                        <div><span id="carbsResult"></span> g (<span id="carbsPercent"></span>%)</div>
-                      </div>
-                    </div>
-                    
-                    <div class="col-md-4">
-                      <div class="result-item">
-                        <strong>
-                          Daily Fats:
-                          <i class="fas fa-info-circle info-icon"></i>
-                        </strong>
-                        <div class="tooltip-text">Fats are essential for hormone function and nutrient absorption. 1g of fat = 9 calories.</div>
-                        <div><span id="fatResult"></span> g (<span id="fatPercent"></span>%)</div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <hr class="stylish">
-                  
-                  <div class="result-item">
-                    <strong>
-                      Per Meal Breakdown (for <span id="mealsPerDay"></span> meals):
-                      <i class="fas fa-info-circle info-icon"></i>
-                    </strong>
-                    <div class="tooltip-text">Dividing your daily intake into meals helps with planning and consistent energy levels.</div>
-                    <div class="row" style="margin-top: 10px;">
-                      <div class="col-md-3">
-                        <div>Calories: <span id="caloriesPerMeal"></span></div>
-                      </div>
-                      <div class="col-md-3">
-                        <div>Protein: <span id="proteinPerMeal"></span>g</div>
-                      </div>
-                      <div class="col-md-3">
-                        <div>Carbs: <span id="carbsPerMeal"></span>g</div>
-                      </div>
-                      <div class="col-md-3">
-                        <div>Fats: <span id="fatPerMeal"></span>g</div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="text-center" style="margin-top: 40px;">
-                    <a href="javascript:void(0)" id="printButton" class="btn btn-lazy btn-lg">
-                      <i class="fas fa-print"></i> Print My Meal Plan
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Footer -->
-      <footer id="fh5co-footer" role="contentinfo">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6 fh5co-widget">
-              <div class="footer-logo">
-                <i class="fas fa-utensils"></i> Lazy Bones
-              </div>
-              <p class="footer-tagline">Nutrition made simple for lazy people.</p>
-            </div>
-            <div class="col-md-6 fh5co-widget text-right">
-              <h3>Quick Links</h3>
-              <ul class="fh5co-footer-links">
-                <li><a href="start.html">CALCULATOR</a></li>
-                <li><a href="learn.html">NUTRITION GUIDES</a></li>
-                <li><a href="about.html">ABOUT</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="row copyright">
-            <div class="col-md-12 text-center">
-              <p>&copy; 2023 Lazy Bones Meal Prep. All Rights Reserved.</p>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
-  
-    <!-- AOS animation library script -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      // Initialize AOS animation
-      document.addEventListener('DOMContentLoaded', function() {
-        AOS.init({
-          duration: 800,
-          easing: 'ease-in-out',
-          once: true
-        });
-        
-        // Unit toggle functionality
-        const unitMetric = document.getElementById('unitMetric');
-        const unitImperial = document.getElementById('unitImperial');
-        const weightLabel = document.getElementById('weightLabel');
-        const heightLabel = document.getElementById('heightLabel');
-        const weightInput = document.getElementById('weight');
-        const heightInput = document.getElementById('height');
-        
-        // Default to metric
-        let isMetric = true;
-        
-        unitMetric.addEventListener('click', function() {
-          if (!isMetric) {
-            isMetric = true;
-            unitMetric.classList.add('active');
-            unitImperial.classList.remove('active');
-            weightLabel.textContent = 'Weight (kg):';
-            heightLabel.textContent = 'Height (cm):';
-            
-            // Convert values if they exist
-            if (weightInput.value) {
-              // Convert lbs to kg (lbs / 2.20462)
-              weightInput.value = Math.round((parseFloat(weightInput.value) / 2.20462) * 10) / 10;
-            }
-            
-            if (heightInput.value) {
-              // Convert inches to cm (inches * 2.54)
-              heightInput.value = Math.round(parseFloat(heightInput.value) * 2.54);
-            }
-          }
-        });
-        
-        unitImperial.addEventListener('click', function() {
-          if (isMetric) {
-            isMetric = false;
-            unitImperial.classList.add('active');
-            unitMetric.classList.remove('active');
-            weightLabel.textContent = 'Weight (lb):';
-            heightLabel.textContent = 'Height (in):';
-            
-            // Convert values if they exist
-            if (weightInput.value) {
-              // Convert kg to lbs (kg * 2.20462)
-              weightInput.value = Math.round((parseFloat(weightInput.value) * 2.20462) * 10) / 10;
-            }
-            
-            if (heightInput.value) {
-              // Convert cm to inches (cm / 2.54)
-              heightInput.value = Math.round((parseFloat(heightInput.value) / 2.54) * 10) / 10;
-            }
-          }
-        });
+
+    <!-- Calculator Header -->
+    <div id="calculator-header" class="fh5co-bg-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center fh5co-heading">
+            <h2>TOO LAZY TO COUNT CALORIES?</h2>
+            <p>Let our calculator do the work for you. Just tell us a few things about yourself!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calculator Form Section -->
+    <div id="calculator-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 col-md-offset-1" data-aos="fade-up">
+            <div class="calculator-form">
+              <img src="images/ch.png" alt="Lazy Bones Character" class="calculator-character">
+              <h3 class="form-title">Nutrition Calculator</h3>
+              <p class="form-subtitle">Even lazybones deserve good nutrition. Let's figure out what you need!</p>
+              
+              <div class="calculator-card">
+                <h4>How Does This Work?</h4>
+                <p>We use the Mifflin-St Jeor Equation to calculate your Basal Metabolic Rate (BMR), which is the calories your body burns at rest. Then we factor in your activity level to determine your Total Daily Energy Expenditure (TDEE). Based on your goals, we recommend calorie and macronutrient targets.</p>
+              </div>
+              
+              <form id="mealPrepForm">
+                <!-- Units Toggle -->
+                <div class="form-group">
+                  <label>Unit Preference:</label>
+                  <div class="unit-selector">
+                    <button type="button" id="unitMetric" class="unit-btn active">Metric (kg/cm)</button>
+                    <button type="button" id="unitImperial" class="unit-btn">Imperial (lb/feet)</button>
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="gender">Gender:</label>
+                      <select id="gender" class="form-control" required>
+                        <option value="">Select</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="age">Age:</label>
+                      <input type="number" id="age" class="form-control" placeholder="Years" required min="15" max="100">
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label id="weightLabel" for="weight">Weight (kg):</label>
+                      <input type="number" id="weight" class="form-control" placeholder="Weight" required min="30" max="300">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label id="heightLabel" for="height">Height (cm):</label>
+                      <input type="number" id="height" class="form-control" placeholder="Height" required min="100" max="250">
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="activity">Activity Level:</label>
+                      <select id="activity" class="form-control" required>
+                        <option value="">Select</option>
+                        <option value="1.2">Sedentary (office job, rarely exercise)</option>
+                        <option value="1.375">Lightly Active (light exercise 1-3 days/week)</option>
+                        <option value="1.55">Moderately Active (moderate exercise 3-5 days/week)</option>
+                        <option value="1.725">Very Active (hard exercise 6-7 days/week)</option>
+                        <option value="1.9">Extremely Active (physical job & hard training)</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="goal">Fitness Goal:</label>
+                      <select id="goal" class="form-control" required>
+                        <option value="">Select</option>
+                        <option value="loss">Fat Loss (calorie deficit)</option>
+                        <option value="maintain">Maintenance (maintain current weight)</option>
+                        <option value="gain">Muscle Gain (calorie surplus)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="meals">Meals Per Day:</label>
+                  <select id="meals" class="form-control" required>
+                    <option value="">Select</option>
+                    <option value="3">3 meals</option>
+                    <option value="4">4 meals</option>
+                    <option value="5">5 meals</option>
+                    <option value="6">6 meals</option>
+                  </select>
+                </div>
+                
+                <div class="form-group text-center">
+                  <button type="submit" class="btn btn-lazy btn-lg">
+                    <i class="fas fa-calculator"></i> Calculate My Macros
+                  </button>
+                </div>
+              </form>
+
+              <div class="calculator-footer">
+                <p>* This calculator provides estimates based on formulas. Individual needs may vary.</p>
+              </div>
+
+              <!-- Results section -->
+              <div id="results" data-aos="fade-up">
+                <h3 class="text-center">Your Personalized Nutrition Plan</h3>
+                
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="result-item">
+                      <strong>
+                        BMR (Basal Metabolic Rate):
+                        <i class="fas fa-info-circle info-icon"></i>
+                      </strong>
+                      <div class="tooltip-text">BMR is the number of calories your body burns at complete rest to maintain vital functions.</div>
+                      <div><span id="bmrResult"></span> calories/day</div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="result-item">
+                      <strong>
+                        TDEE (Total Daily Energy):
+                        <i class="fas fa-info-circle info-icon"></i>
+                      </strong>
+                      <div class="tooltip-text">TDEE includes your BMR plus the calories you burn through daily activity and exercise.</div>
+                      <div><span id="tdeeResult"></span> calories/day</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="result-item">
+                  <strong>
+                    Daily Calorie Target:
+                    <i class="fas fa-info-circle info-icon"></i>
+                  </strong>
+                  <div class="tooltip-text">Based on your goal, we've adjusted your daily calorie intake to help you achieve your desired results.</div>
+                  <div><span id="calorieResult"></span> calories/day</div>
+                </div>
+                
+                <hr class="stylish">
+                
+                <div class="result-item">
+                  <strong>
+                    Macronutrient Distribution:
+                    <i class="fas fa-info-circle info-icon"></i>
+                  </strong>
+                  <div class="tooltip-text">Macronutrients are the nutrients your body needs in large amounts: protein, carbohydrates, and fats.</div>
+                  <div class="macro-bar">
+                    <div class="protein-bar" id="proteinBar"></div>
+                    <div class="carbs-bar" id="carbsBar"></div>
+                    <div class="fat-bar" id="fatBar"></div>
+                  </div>
+                  <div class="macro-legend">
+                    <div class="legend-item">
+                      <div class="legend-color protein-bar"></div>
+                      <span>Protein</span>
+                    </div>
+                    <div class="legend-item">
+                      <div class="legend-color carbs-bar"></div>
+                      <span>Carbs</span>
+                    </div>
+                    <div class="legend-item">
+                      <div class="legend-color fat-bar"></div>
+                      <span>Fats</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="result-item">
+                      <strong>
+                        Daily Protein:
+                        <i class="fas fa-info-circle info-icon"></i>
+                      </strong>
+                      <div class="tooltip-text">Protein is crucial for muscle repair and growth. 1g of protein = 4 calories.</div>
+                      <div><span id="proteinResult"></span> g (<span id="proteinPercent"></span>%)</div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-4">
+                    <div class="result-item">
+                      <strong>
+                        Daily Carbs:
+                        <i class="fas fa-info-circle info-icon"></i>
+                      </strong>
+                      <div class="tooltip-text">Carbohydrates are your body's main energy source. 1g of carbs = 4 calories.</div>
+                      <div><span id="carbsResult"></span> g (<span id="carbsPercent"></span>%)</div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-4">
+                    <div class="result-item">
+                      <strong>
+                        Daily Fats:
+                        <i class="fas fa-info-circle info-icon"></i>
+                      </strong>
+                      <div class="tooltip-text">Fats are essential for hormone function and nutrient absorption. 1g of fat = 9 calories.</div>
+                      <div><span id="fatResult"></span> g (<span id="fatPercent"></span>%)</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <hr class="stylish">
+                
+                <div class="result-item">
+                  <strong>
+                    Per Meal Breakdown (for <span id="mealsPerDay"></span> meals):
+                    <i class="fas fa-info-circle info-icon"></i>
+                  </strong>
+                  <div class="tooltip-text">Dividing your daily intake into meals helps with planning and consistent energy levels.</div>
+                  <div class="row" style="margin-top: 10px;">
+                    <div class="col-md-3">
+                      <div>Calories: <span id="caloriesPerMeal"></span></div>
+                    </div>
+                    <div class="col-md-3">
+                      <div>Protein: <span id="proteinPerMeal"></span>g</div>
+                    </div>
+                    <div class="col-md-3">
+                      <div>Carbs: <span id="carbsPerMeal"></span>g</div>
+                    </div>
+                    <div class="col-md-3">
+                      <div>Fats: <span id="fatPerMeal"></span>g</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="text-center" style="margin-top: 40px;">
+                  <a href="javascript:void(0)" id="printButton" class="btn btn-lazy btn-lg">
+                    <i class="fas fa-print"></i> Print My Meal Plan
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="fh5co-footer" role="contentinfo">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 fh5co-widget">
+            <div class="footer-logo">
+              <i class="fas fa-utensils"></i> Lazy Bones
+            </div>
+            <p class="footer-tagline">Nutrition made simple for lazy people.</p>
+          </div>
+          <div class="col-md-6 fh5co-widget text-right">
+            <h3>Quick Links</h3>
+            <ul class="fh5co-footer-links">
+              <li><a href="start.html">CALCULATOR</a></li>
+              <li><a href="learn.html">NUTRITION GUIDES</a></li>
+              <li><a href="about.html">ABOUT</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row copyright">
+          <div class="col-md-12 text-center">
+            <p>&copy; 2023 Lazy Bones Meal Prep. All Rights Reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- AOS animation library script -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Initialize AOS animation
+    document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true
       });
-    </script>
-    
-    <script src="scripts/scripts.js"></script>
-  </body>
-  </html>
+      
+      // Unit toggle functionality
+      const unitMetric = document.getElementById('unitMetric');
+      const unitImperial = document.getElementById('unitImperial');
+      const weightLabel = document.getElementById('weightLabel');
+      const heightLabel = document.getElementById('heightLabel');
+      const weightInput = document.getElementById('weight');
+      const heightInput = document.getElementById('height');
+      
+      // Default to metric
+      let isMetric = true;
+      
+      unitMetric.addEventListener('click', function() {
+        if (!isMetric) {
+          isMetric = true;
+          unitMetric.classList.add('active');
+          unitImperial.classList.remove('active');
+          weightLabel.textContent = 'Weight (kg):';
+          heightLabel.textContent = 'Height (cm):';
+          
+          // Convert values if they exist
+          if (weightInput.value) {
+            // Convert lbs to kg (lbs / 2.20462)
+            weightInput.value = Math.round((parseFloat(weightInput.value) / 2.20462) * 10) / 10;
+          }
+          
+          if (heightInput.value) {
+            // Convert inches to cm (inches * 2.54)
+            heightInput.value = Math.round(parseFloat(heightInput.value) * 2.54);
+          }
+        }
+      });
+      
+      unitImperial.addEventListener('click', function() {
+        if (isMetric) {
+          isMetric = false;
+          unitImperial.classList.add('active');
+          unitMetric.classList.remove('active');
+          weightLabel.textContent = 'Weight (lb):';
+          heightLabel.textContent = 'Height (feet):';
+          
+          // Convert values if they exist
+          if (weightInput.value) {
+            // Convert kg to lbs (kg * 2.20462)
+            weightInput.value = Math.round((parseFloat(weightInput.value) * 2.20462) * 10) / 10;
+          }
+          
+          if (heightInput.value) {
+            // Convert cm to inches (cm / 2.54)
+            heightInput.value = Math.round((parseFloat(heightInput.value) / 2.54) * 10) / 10;
+          }
+        }
+      });
+    });
+  </script>
   
+  <script src="scripts/scripts.js"></script>
+</body>
+</html>
